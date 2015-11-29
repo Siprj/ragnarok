@@ -19,13 +19,18 @@ cabal-version:       >=1.10
 
 library
   exposed-modules:
-    Network.SIP
+    Network.SIP.Type
 
   -- other-modules:
 
   -- other-extensions:
 
-  build-depends:       base >=4.8 && <4.9
+  build-depends:
+      base >=4.8 && <4.9
+
+    , text
+
+    , network-uri
 
   hs-source-dirs:      src
 
@@ -36,7 +41,6 @@ library
     -fwarn-tabs
     -fwarn-missing-import-lists
     -fwarn-implicit-prelude
-  cpp-options:          -DEXPORT_INTERNALS
 
 test-suite unit-tests
   hs-source-dirs:       src, test
@@ -52,6 +56,7 @@ test-suite unit-tests
   build-depends:
       base >=4.6 && <4.9
 
+    , network-uri
 
     -- {{{ Test-suite dependencies --------------------------------------------
     , HUnit >= 1.2 && < 2
