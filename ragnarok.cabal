@@ -13,6 +13,7 @@ author:              Jan Sipr
 maintainer:          sipr.jan@gmail.com
 category:            Network
 build-type:          Simple
+copyright:           Copyright: (c) 2015 Jan Sipr
 
 cabal-version:       >=1.10
 
@@ -27,9 +28,8 @@ library
 
   build-depends:
       base >=4.8 && <4.9
-
+    , case-insensitive
     , text
-
     , network-uri
 
   hs-source-dirs:      src
@@ -55,8 +55,9 @@ test-suite unit-tests
 
   build-depends:
       base >=4.6 && <4.9
-
+    , case-insensitive
     , network-uri
+    , text
 
     -- {{{ Test-suite dependencies --------------------------------------------
     , HUnit >= 1.2 && < 2
