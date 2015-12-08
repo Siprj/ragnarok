@@ -20,7 +20,11 @@ cabal-version:       >=1.10
 
 library
   exposed-modules:
-    Network.SIP.Type
+    Network.SIP.Type.Header
+    Network.SIP.Type.Request
+    Network.SIP.Type.RequestMethod
+    Network.SIP.Type.Response
+    Network.SIP.Type.ResponseStatus
 
   -- other-modules:
 
@@ -28,6 +32,8 @@ library
 
   build-depends:
       base >=4.8 && <4.9
+    , attoparsec
+    , bytestring
     , case-insensitive
     , text
     , network-uri
@@ -55,6 +61,8 @@ test-suite unit-tests
 
   build-depends:
       base >=4.6 && <4.9
+    , attoparsec
+    , bytestring
     , case-insensitive
     , network-uri
     , text
