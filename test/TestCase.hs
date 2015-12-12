@@ -14,9 +14,14 @@ module TestCase (tests)
 
 import Test.Framework (Test, testGroup)
 
-import qualified TestCase.Network.SIP.Type as SIP.Types (tests)
+import qualified TestCase.Network.SIP.Parser.Header as
+    Parser.Header (tests)
+import qualified TestCase.Network.SIP.Parser.RequestMethod as
+    Parser.RequestMethod (tests)
 
 tests :: [Test]
 tests =
-    [ testGroup "TestCase.Network.SIP.Type" SIP.Types.tests
+    [ testGroup "TestCase.Network.SIP.Parser.Header" Parser.Header.tests
+    , testGroup "TestCase.Network.SIP.Parser.RequestMethod"
+          Parser.RequestMethod.tests
     ]
