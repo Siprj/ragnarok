@@ -1,8 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DeriveGeneric #-}
 -- |
 -- Module:       Network.SIP.Type.Header
 -- Description:
@@ -11,22 +8,19 @@
 --
 -- Big description.
 module Network.SIP.Type.Header
-    ( HeaderField(..)
+    ( Header(..)
     , HeaderName(..)
     , headerNameMap
     )
   where
 
-import Data.CaseInsensitive (CI)
-import Data.Data (Data)
-import Data.Either (Either(Right, Left))
+import Data.ByteString (ByteString)
 import Data.Eq (Eq)
 import Data.Text (Text)
-import GHC.Generics (Generic)
 import Text.Show (Show)
 
-data HeaderField = HeaderField
-    { fieldName :: Text
+data Header = Header
+    { fieldName :: HeaderName
     , fieldValue :: Text
     }
   deriving (Show, Eq)
@@ -102,7 +96,7 @@ data HeaderName
 --      where
 --        errorMsg = "Can't parse Header Name: " <> t
 
-headerNameMap :: [(HeaderName, CI Text)]
+headerNameMap :: [(HeaderName, ByteString)]
 headerNameMap =
     [ (Accept, "Accept")
     , (AcceptEncoding, "Accept-Encoding")

@@ -1,8 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DeriveGeneric #-}
 -- |
 -- Module:       Network.SIP.Type.Response
 -- Description:
@@ -19,11 +16,11 @@ import Data.ByteString (ByteString)
 import Text.Show (Show)
 
 import Network.SIP.Type.ResponseStatus (Status)
-import Network.SIP.Type.Header (HeaderField)
+import Network.SIP.Type.Header (Header)
 
 data Response = Response
     { rsStatus :: Status
-    , rsHeaders :: [HeaderField]
+    , rsHeaders :: [Header]
     , rsBody :: ByteString
     }
   deriving (Show)
