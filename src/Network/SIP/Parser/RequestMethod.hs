@@ -1,7 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 -- |
--- Module:       Network.SIP.Parser.Header
+-- Module:       Network.SIP.Parser.RequestMethod
 -- Description:
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT

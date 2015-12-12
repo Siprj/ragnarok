@@ -1,7 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 -- |
--- Module:       TestCase.Network.SIP.Type
+-- Module:       TestCase.Network.SIP.Parser.Header
 -- Description:  Tests of SIP types
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT
