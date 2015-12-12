@@ -54,6 +54,11 @@ test-suite unit-tests
   main-is:              unit-tests.hs
 
   other-modules:
+    Network.SIP.Type.Header
+    Network.SIP.Type.Request
+    Network.SIP.Type.RequestMethod
+    Network.SIP.Type.Response
+    Network.SIP.Type.ResponseStatus
 
   default-language:     Haskell2010
   other-extensions:
