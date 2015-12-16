@@ -67,6 +67,9 @@ test-suite unit-tests
     Network.SIP.Type.Response
     Network.SIP.Type.ResponseStatus
     Network.SIP.Type.Uri
+    TestCase.Network.SIP.Parser.Uri
+    TestCase.Network.SIP.Parser.Header
+    TestCase.Network.SIP.Parser.RequestMethod
 
   default-language:     Haskell2010
   other-extensions:

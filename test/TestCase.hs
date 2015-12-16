@@ -18,10 +18,13 @@ import qualified TestCase.Network.SIP.Parser.Header as
     Parser.Header (tests)
 import qualified TestCase.Network.SIP.Parser.RequestMethod as
     Parser.RequestMethod (tests)
+import qualified TestCase.Network.SIP.Parser.Uri as
+    Parser.Uri (tests)
 
 tests :: [Test]
 tests =
     [ testGroup "TestCase.Network.SIP.Parser.Header" Parser.Header.tests
     , testGroup "TestCase.Network.SIP.Parser.RequestMethod"
           Parser.RequestMethod.tests
+    , testGroup "TestCase.Network.SIP.Parser.Uri" Parser.Uri.tests
     ]
