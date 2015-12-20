@@ -23,6 +23,7 @@ library
     Network.SIP.Parser.Header
     Network.SIP.Parser.Uri
     Network.SIP.Parser.RequestMethod
+    Network.SIP.Parser.Request
     Network.SIP.Type.Header
     Network.SIP.Type.Request
     Network.SIP.Type.RequestMethod

@@ -25,16 +25,6 @@ data Header = Header
     }
   deriving (Show, Eq)
 
---instance ToSip HeaderField where
---    toSip v = fieldName v <> ": " <> fieldValue v
---
---instance FromSip HeaderField where
---    fromSip t = aEToSipE $ parseOnly headerParser t
---      where
---        headerParser = HeaderField
---            <$> (takeTill (== ':') <* char ':' <* (skipMany $ char ' '))
---            <*> takeText
-
 data HeaderName
     = Accept
     | AcceptEncoding
@@ -82,19 +72,6 @@ data HeaderName
     | WWWAuthenticate
     | Custom Text
   deriving (Show, Eq)
-
---instance ToSip HeaderName where
---    toSip (Custom name) = name
---    toSip a = original . fromJust $ lookup a headerNameMap
---
---instance FromSip HeaderName where
---    fromSip t = case filter (\x -> snd x == mk t) headerNameMap of
---        [] -> if "X-" `isPrefixOf` t then
---                Right (Custom $ t)
---                else Left errorMsg
---        h:_ -> Right $ fst h
---      where
---        errorMsg = "Can't parse Header Name: " <> t
 
 headerNameMap :: [(HeaderName, ByteString)]
 headerNameMap =

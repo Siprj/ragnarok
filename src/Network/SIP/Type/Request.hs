@@ -13,16 +13,17 @@ module Network.SIP.Type.Request
   where
 
 import Data.ByteString (ByteString)
-import Network.URI (URI)
+import Data.Maybe (Maybe)
 import Text.Show (Show)
 
-import Network.SIP.Type.RequestMethod (RequestMethod)
 import Network.SIP.Type.Header (Header)
+import Network.SIP.Type.RequestMethod (RequestMethod)
+import Network.SIP.Type.Uri (Uri(Uri))
 
 data Request = Request
     { rqMethod :: RequestMethod
-    , rqUri :: URI
+    , rqUri :: Uri
     , rqHeaders :: [Header]
-    , rqBody :: ByteString
+    , rqBody :: Maybe ByteString
     }
   deriving (Show)
