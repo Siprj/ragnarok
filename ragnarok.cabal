@@ -20,8 +20,8 @@ cabal-version:       >=1.10
 
 library
   exposed-modules:
-    Network.SIP.LLSIP.Parser
-    Network.SIP.LLSIP.Type
+    Network.SIP.LowLevel.Parser
+    Network.SIP.LowLevel.Type
     Network.SIP.Parser.Header
     Network.SIP.Parser.Request
     Network.SIP.Parser.RequestMethod
@@ -77,7 +77,7 @@ test-suite unit-tests
     Network.SIP.Type.Response
     Network.SIP.Type.ResponseStatus
     Network.SIP.Type.Uri
-    TestCase.Network.SIP.LLSIP.Parser
+    TestCase.Network.SIP.LowLevel.Parser
     TestCase.Network.SIP.Parser.Header
     TestCase.Network.SIP.Parser.RequestMethod
     TestCase.Network.SIP.Parser.Uri
@@ -109,47 +109,6 @@ test-suite unit-tests
     , test-framework-hunit >= 0.2.6
     , test-framework-quickcheck2 >= 0.3
     -- }}} Test-suite dependencies --------------------------------------------
-
-  ghc-options:
-    -Wall
-    -fwarn-tabs
-    -fwarn-missing-import-lists
-    -fwarn-implicit-prelude
-  cpp-options:          -DEXPORT_INTERNALS
-
-executable performace
-  hs-source-dirs:       src, perf
-  type:                 exitcode-stdio-1.0
-  main-is:              perf.hs
-
-  other-modules:
-    Network.SIP.Parser.Header
-    Network.SIP.Parser.RequestMethod
-    Network.SIP.Parser.Uri
-    Network.SIP.NAParser
-    Network.SIP.Type.Header
-    Network.SIP.Type.Request
-    Network.SIP.Type.RequestMethod
-    Network.SIP.Type.Response
-    Network.SIP.Type.ResponseStatus
-    Network.SIP.Type.Uri
-
-  default-language:     Haskell2010
-  other-extensions:
-    NoImplicitPrelude
-
-  build-depends:
-      base >=4.6 && <4.9
-    , attoparsec
-    , bytestring
-    , case-insensitive
-    , network-uri
-    , text
-
-    -- for porformance tests
-    , deepseq
-    , criterion
-
 
   ghc-options:
     -Wall
