@@ -48,43 +48,30 @@ import Data.Text.Encoding (decodeUtf8)
 import Prelude ((+), (-))
 import System.IO (IO)
 
-import Network.SIP.LLSIP.Type
+import Network.SIP.LowLevel.Type
     ( InvalidRequest
         ( ConnectionClosedByPeer
         , IncompleteHeaders
         , OverLargeHeader
+        , BadFirstLine
+        , WrongHeader
         )
     , Source
     , readSource
     , readSource'
     , leftoverSource
     )
-
-import Network.SIP.LLSIP.Parser (headerLines)
+import qualified Network.SIP.LowLevel.Type as LL (Header)
+import Network.SIP.LowLevel.Parser (headerLines, parseHeader)
 import Network.SIP.Parser.RequestMethod (requestMethodParser)
 import Network.SIP.Parser.Uri (parseUri)
 import Network.SIP.Type.Header (Header(Header), headerNameMapCI)
-import Network.SIP.Type.Request (Request(Request))
 import Network.SIP.Type.RequestMethod (RequestMethod)
+import Network.SIP.Type.Request (Request(Request))
 import Network.SIP.Type.Uri (Uri)
-import Network.SIP.LLSIP.Type
-    ( InvalidRequest
-        ( IncompleteHeaders
-        , BadFirstLine
-        , WrongHeader
-        )
-    )
 
 sipVersion :: ByteString
 sipVersion = "SIP/2.0"
-
-parseHeader :: ByteString -> LLHeader
-parseHeader s =
-    let (k, rest) = break (== 58) s -- ':'
-        rest' = dropWhile (\c -> c == 32 || c == 9) $ drop 1 rest
-     in (mk k, rest')
-
-type LLHeader = (CI ByteString, ByteString)
 
 parseRequest :: Source -> IO Request
 parseRequest source = do
@@ -113,6 +100,6 @@ parseRequest source = do
                 (Left e) -> fail . unpack $ e <> "parseUri method failed"
                 (Right u) -> return u
 
-    typeHeader :: LLHeader -> IO Header
+    typeHeader :: LL.Header -> IO Header
     typeHeader (h, v) = maybe (throwIO WrongHeader) return $ fmap (\x -> Header x (decodeUtf8 v)) $ lookup h headerNameMapCI
 

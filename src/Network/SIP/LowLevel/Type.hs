@@ -5,15 +5,15 @@
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE BangPatterns #-}
 -- |
--- Module:       Network.SIP.Parser
+-- Module:       Network.SIP.LowLevel.Type
 -- Description:  Types for low level parser
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT
 --
 -- Most of these types ware taken from warp package
 -- https://github.com/yesodweb/wai/blob/master/warp/Network/Wai/Handler/Warp/Types.hs
-module Network.SIP.LLSIP.Type
-    ( Header(..)
+module Network.SIP.LowLevel.Type
+    ( Header
     , Source(..)
     , InvalidRequest(..)
     , mkSource
@@ -65,7 +65,7 @@ leftoverSource (Source ref _) bs = writeIORef ref bs
 readLeftoverSource :: Source -> IO ByteString
 readLeftoverSource (Source ref _) = readIORef ref
 
-data Header = Header (CI ByteString) ByteString
+type Header = (CI ByteString, ByteString)
 
 -- | Error types for bad 'SIP message.
 data InvalidRequest
@@ -94,6 +94,3 @@ instance Show InvalidRequest where
     show WrongHeader = "Wrong header"
 
 instance Exception InvalidRequest
-
-
-

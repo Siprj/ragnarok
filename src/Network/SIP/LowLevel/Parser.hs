@@ -5,15 +5,16 @@
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE BangPatterns #-}
 -- |
--- Module:       Network.SIP.Parser
+-- Module:       Network.SIP.LowLevel.Parser
 -- Description:  Low level parser
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT
 --
 -- Low level parser taken form warp package
 -- https://github.com/yesodweb/wai/blob/master/warp/Network/Wai/Handler/Warp/Request.hs
-module Network.SIP.LLSIP.Parser
+module Network.SIP.LowLevel.Parser
     ( headerLines
+    , parseHeader
     )
   where
 
@@ -23,14 +24,17 @@ import Control.Monad (when)
 import Data.Bool (Bool(True, False), (||), (&&), not, otherwise)
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as S
-    ( null
-    , length
-    , index
-    , append
+    ( append
+    , break
     , drop
+    , dropWhile
     , elemIndex
+    , index
+    , length
+    , null
     )
 import qualified Data.ByteString.Unsafe as SU (unsafeTake, unsafeDrop)
+import Data.CaseInsensitive (mk)
 import Data.Eq ((==))
 import Data.Function (($), (.), id)
 import Data.Int (Int)
@@ -39,8 +43,9 @@ import Data.Ord ((<), (>))
 import Prelude ((+), (-))
 import System.IO (IO)
 
-import Network.SIP.LLSIP.Type
-    ( InvalidRequest
+import Network.SIP.LowLevel.Type
+    ( Header
+    , InvalidRequest
         ( ConnectionClosedByPeer
         , IncompleteHeaders
         , OverLargeHeader
@@ -52,7 +57,8 @@ import Network.SIP.LLSIP.Type
     )
 
 
--- Acording to rfc3261 SIP message length MUST NOT be greater than UDP packet.
+-- | Acording to rfc3261 SIP message length MUST NOT be greater than UDP
+-- packet.
 maxTotalHeaderLength :: Int
 maxTotalHeaderLength = 65507
 
@@ -62,6 +68,14 @@ headerLines src = do
     if S.null bs
         then throwIO ConnectionClosedByPeer
         else push src (THStatus 0 id id) bs
+
+
+parseHeader :: ByteString -> Header
+parseHeader s =
+    let (k, rest) = S.break (== 58) s -- ':'
+        rest' = S.dropWhile (\c -> c == 32 || c == 9) $ S.drop 1 rest
+     in (mk k, rest')
+
 
 ----------------------------------------------------------------
 
