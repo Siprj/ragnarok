@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE NoImplicitPrelude #-}
@@ -26,8 +27,11 @@ import Data.Word (Word16)
 import GHC.Generics (Generic)
 import Text.Show (Show)
 
+-- Performance test
+import Control.DeepSeq (NFData)
+
 data Scheme = SIP | SIPS
-  deriving (Show, Eq, Data, Ord, Generic, Typeable)
+  deriving (Show, Eq, Data, Ord, Generic, Typeable, NFData)
 
 data Uri = Uri
     { uriScheme :: Scheme
@@ -35,4 +39,4 @@ data Uri = Uri
     , uriHost :: Text
     , uriPort :: Maybe Word16
     }
-  deriving (Show, Eq, Data, Generic, Typeable)
+  deriving (Show, Eq, Data, Generic, Typeable, NFData)

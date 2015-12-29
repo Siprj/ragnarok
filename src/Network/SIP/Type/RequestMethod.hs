@@ -1,7 +1,8 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Type.RequestMethod
 -- Description:
@@ -20,6 +21,9 @@ import Prelude (Enum)
 import GHC.Generics (Generic)
 import Text.Show (Show)
 
+-- Performance test
+import Control.DeepSeq (NFData)
+
 data RequestMethod
     = ACK
     | BYE
@@ -35,7 +39,7 @@ data RequestMethod
     | REGISTER
     | SUBSCRIBE
     | UPDATE
-  deriving (Show, Eq, Enum, Data, Generic)
+  deriving (Show, Eq, Enum, Data, Generic, NFData)
 
 --instance ToSip RequestMethod where
 --    toSip = pack . showConstr . toConstr
