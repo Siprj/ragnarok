@@ -20,10 +20,13 @@ cabal-version:       >=1.10
 
 library
   exposed-modules:
+    Network.SIP.LLSIP.Parser
+    Network.SIP.LLSIP.Type
     Network.SIP.Parser.Header
-    Network.SIP.Parser.Uri
-    Network.SIP.Parser.RequestMethod
     Network.SIP.Parser.Request
+    Network.SIP.Parser.RequestMethod
+    Network.SIP.Parser.Uri
+    Network.SIP.NAParser
     Network.SIP.Type.Header
     Network.SIP.Type.Request
     Network.SIP.Type.RequestMethod
@@ -38,10 +41,15 @@ library
   build-depends:
       base >=4.8 && <4.9
     , attoparsec
+    , array
     , bytestring
     , case-insensitive
     , text
     , network-uri
+
+    -- for porformance tests
+    , deepseq
+    , criterion
 
   hs-source-dirs:      src
 
@@ -62,15 +70,18 @@ test-suite unit-tests
     Network.SIP.Parser.Header
     Network.SIP.Parser.RequestMethod
     Network.SIP.Parser.Uri
+    Network.SIP.NAParser
     Network.SIP.Type.Header
     Network.SIP.Type.Request
     Network.SIP.Type.RequestMethod
     Network.SIP.Type.Response
     Network.SIP.Type.ResponseStatus
     Network.SIP.Type.Uri
-    TestCase.Network.SIP.Parser.Uri
+    TestCase.Network.SIP.LLSIP.Parser
     TestCase.Network.SIP.Parser.Header
     TestCase.Network.SIP.Parser.RequestMethod
+    TestCase.Network.SIP.Parser.Uri
+    TestCase.Network.SIP.NAParser
 
   default-language:     Haskell2010
   other-extensions:
@@ -84,6 +95,10 @@ test-suite unit-tests
     , network-uri
     , text
 
+    -- for porformance tests
+    , deepseq
+    , criterion
+
     -- {{{ Test-suite dependencies --------------------------------------------
     , HUnit >= 1.2 && < 2
     , QuickCheck >= 2.4 && < 2.9
@@ -94,6 +109,47 @@ test-suite unit-tests
     , test-framework-hunit >= 0.2.6
     , test-framework-quickcheck2 >= 0.3
     -- }}} Test-suite dependencies --------------------------------------------
+
+  ghc-options:
+    -Wall
+    -fwarn-tabs
+    -fwarn-missing-import-lists
+    -fwarn-implicit-prelude
+  cpp-options:          -DEXPORT_INTERNALS
+
+executable performace
+  hs-source-dirs:       src, perf
+  type:                 exitcode-stdio-1.0
+  main-is:              perf.hs
+
+  other-modules:
+    Network.SIP.Parser.Header
+    Network.SIP.Parser.RequestMethod
+    Network.SIP.Parser.Uri
+    Network.SIP.NAParser
+    Network.SIP.Type.Header
+    Network.SIP.Type.Request
+    Network.SIP.Type.RequestMethod
+    Network.SIP.Type.Response
+    Network.SIP.Type.ResponseStatus
+    Network.SIP.Type.Uri
+
+  default-language:     Haskell2010
+  other-extensions:
+    NoImplicitPrelude
+
+  build-depends:
+      base >=4.6 && <4.9
+    , attoparsec
+    , bytestring
+    , case-insensitive
+    , network-uri
+    , text
+
+    -- for porformance tests
+    , deepseq
+    , criterion
+
 
   ghc-options:
     -Wall

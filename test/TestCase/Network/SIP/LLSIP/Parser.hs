@@ -1,0 +1,72 @@
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
+-- |
+-- Module:       TestCase.Network.SIP.Parser.Header
+-- Description:  Tests of SIP types
+-- Copyright:    Copyright (c) 2015 Jan Sipr
+-- License:      MIT
+--
+-- Stability:    stable
+-- Portability:  NoImplicitPrelude, OverloadedStrings
+--
+-- Unit and property tests for SIP types and their instances.
+module TestCase.Network.SIP.LLSIP.Parser (tests)
+  where
+
+import Control.Monad (return)
+import Data.Bool (Bool(True, False))
+import Data.ByteString (ByteString)
+import Data.Eq ((==))
+import Data.Function (($))
+import Data.Monoid ((<>))
+import Text.Show (show)
+
+import Test.Framework (Test, testGroup)
+import Test.Framework.Providers.HUnit (testCase)
+import Test.HUnit.Base (assertFailure)
+import Test.HUnit.Lang (Assertion)
+
+import Network.SIP.LLSIP.Parser (headerLines)
+import Network.SIP.LLSIP.Type (mkSource)
+
+testHeaderLines :: ByteString -> [ByteString] -> Assertion
+testHeaderLines s hl = do
+    source <- mkSource $ return s
+    res <- headerLines source
+    case res == hl of
+        True -> return ()
+        False -> assertFailure $ "Error parsing: " <> show s <> " expected result"
+            <> show hl <> "\nActual result: " <> show res
+
+message1 :: ByteString
+message1 = "REGISTER sips:ss2.biloxi.example.com SIP/2.0\r\n" <>
+    "Via: SIP/2.0/TLS client.biloxi.example.com:5061;branch=z9hG4bKnashds7\r\n" <>
+    "Max-Forwards: 70\r\n" <>
+    "From: Bob <sips:bob@biloxi.example.com>;tag=a73kszlfl\r\n" <>
+    "To: Bob <sips:bob@biloxi.example.com>\r\n" <>
+    "Call-ID: 1j9FpLxk3uxtm8tn@biloxi.example.com\r\n" <>
+    "CSeq: 1 REGISTER\r\n" <>
+    "Contact: <sips:bob@client.biloxi.example.com>\r\n" <>
+    "Content-Length: 0\r\n\r\n"
+
+parsedList1 :: [ByteString]
+parsedList1 =
+    [ "REGISTER sips:ss2.biloxi.example.com SIP/2.0"
+    , "Via: SIP/2.0/TLS client.biloxi.example.com:5061;branch=z9hG4bKnashds7"
+    , "Max-Forwards: 70"
+    , "From: Bob <sips:bob@biloxi.example.com>;tag=a73kszlfl"
+    , "To: Bob <sips:bob@biloxi.example.com>"
+    , "Call-ID: 1j9FpLxk3uxtm8tn@biloxi.example.com"
+    , "CSeq: 1 REGISTER"
+    , "Contact: <sips:bob@client.biloxi.example.com>"
+    , "Content-Length: 0"
+    ]
+
+tests :: [Test]
+tests =
+    [ testGroup "parse header to lines"
+        [ testCase
+            "message 1"
+                $ testHeaderLines message1 parsedList1
+        ]
+    ]
