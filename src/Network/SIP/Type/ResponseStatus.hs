@@ -1,7 +1,8 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Type.ResponseStatus
 -- Description:
@@ -22,6 +23,9 @@ import Data.Text (Text)
 import GHC.Generics (Generic)
 import Text.Show (Show)
 
+-- Performance test
+import Control.DeepSeq (NFData)
+
 data ResponseCode
     = OK_200
     | Ringing_180
@@ -29,7 +33,7 @@ data ResponseCode
     | BadRequest_400
     | Unauthorized_401
     | Forbidden_403
-  deriving (Show, Eq, Data, Generic)
+  deriving (Show, Eq, Data, Generic, NFData)
 
 -- Unknown messages must be moved somewhere else
 data UnknownResponseCode
@@ -39,13 +43,13 @@ data UnknownResponseCode
     | Unknown_4xx
     | Unknown_5xx
     | Unknown_6xx
-  deriving (Show, Eq)
+  deriving (Show, Eq, Data, Generic, NFData)
 
 data Status = Status
     { statusCode :: Text
     , statusMsg :: Text
     }
-  deriving (Show)
+  deriving (Show, Eq, Data, Generic, NFData)
 
 responseStatusMap :: [(ResponseCode, Status)]
 responseStatusMap =
