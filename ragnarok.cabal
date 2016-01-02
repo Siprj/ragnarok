@@ -72,7 +72,6 @@ test-suite unit-tests
     TestCase.Network.SIP.Parser.Header
     TestCase.Network.SIP.Parser.RequestMethod
     TestCase.Network.SIP.Parser.Uri
-    TestCase.Network.SIP.NAParser
 
   default-language:     Haskell2010
   other-extensions:
