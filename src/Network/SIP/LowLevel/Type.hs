@@ -15,7 +15,7 @@
 module Network.SIP.LowLevel.Type
     ( Header
     , Source(..)
-    , InvalidRequest(..)
+    , InvalidMessage(..)
     , mkSource
     , readSource
     , readSource'
@@ -68,8 +68,8 @@ readLeftoverSource (Source ref _) = readIORef ref
 type Header = (CI ByteString, ByteString)
 
 -- | Error types for bad 'SIP message.
-data InvalidRequest
-    = BadFirstLine String
+data InvalidMessage
+    = BadRequestLine String
     | BadProxyHeader String
     | ConnectionClosedByPeer
     | IncompleteHeaders
@@ -79,10 +79,10 @@ data InvalidRequest
     | WrongHeader
   deriving (Eq, Typeable)
 
-instance Show InvalidRequest where
+instance Show InvalidMessage where
     show (NotEnoughLines xs) = "Incomplete request headers, received: "
         <> show xs
-    show (BadFirstLine s) = "Invalid first line of request: " <> show s
+    show (BadRequestLine s) = "Invalid first line of request: " <> show s
     show NonHttp = "Request line specified a non-HTTP request"
     show IncompleteHeaders =
         "Request headers did not finish transmission"
@@ -93,4 +93,4 @@ instance Show InvalidRequest where
         <> show s
     show WrongHeader = "Wrong header"
 
-instance Exception InvalidRequest
+instance Exception InvalidMessage

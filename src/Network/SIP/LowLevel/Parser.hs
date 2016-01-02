@@ -45,7 +45,7 @@ import System.IO (IO)
 
 import Network.SIP.LowLevel.Type
     ( Header
-    , InvalidRequest
+    , InvalidMessage
         ( ConnectionClosedByPeer
         , IncompleteHeaders
         , OverLargeHeader
@@ -55,7 +55,6 @@ import Network.SIP.LowLevel.Type
     , readSource
     , readSource'
     )
-
 
 -- | Acording to rfc3261 SIP message length MUST NOT be greater than UDP
 -- packet.
@@ -69,13 +68,11 @@ headerLines src = do
         then throwIO ConnectionClosedByPeer
         else push src (THStatus 0 id id) bs
 
-
 parseHeader :: ByteString -> Header
 parseHeader s =
     let (k, rest) = S.break (== 58) s -- ':'
         rest' = S.dropWhile (\c -> c == 32 || c == 9) $ S.drop 1 rest
      in (mk k, rest')
-
 
 ----------------------------------------------------------------
 
