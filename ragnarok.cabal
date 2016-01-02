@@ -22,9 +22,12 @@ library
   exposed-modules:
     Network.SIP.LowLevel.Parser
     Network.SIP.LowLevel.Type
+    Network.SIP.Parser
+    Network.SIP.Parser.RequestLine
     Network.SIP.Parser.RequestMethod
     Network.SIP.Parser.Uri
     Network.SIP.Type.Header
+    Network.SIP.Type.Message
     Network.SIP.Type.RequestMethod
     Network.SIP.Type.ResponseStatus
     Network.SIP.Type.Uri
@@ -62,9 +65,14 @@ test-suite unit-tests
   main-is:              unit-tests.hs
 
   other-modules:
+    Network.SIP.LowLevel.Parser
+    Network.SIP.LowLevel.Type
+    Network.SIP.Parser
+    Network.SIP.Parser.RequestLine
     Network.SIP.Parser.RequestMethod
     Network.SIP.Parser.Uri
     Network.SIP.Type.Header
+    Network.SIP.Type.Message
     Network.SIP.Type.RequestMethod
     Network.SIP.Type.ResponseStatus
     Network.SIP.Type.Uri

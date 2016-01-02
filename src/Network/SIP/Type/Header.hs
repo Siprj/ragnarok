@@ -14,7 +14,6 @@ module Network.SIP.Type.Header
     ( Header(..)
     , HeaderName(..)
     , headerNameMap
-    , headerNameMapCI
     )
   where
 
@@ -83,7 +82,7 @@ data HeaderName
     | Custom Text
   deriving (Show, Eq, Data, Generic, NFData)
 
-headerNameMap :: [(HeaderName, ByteString)]
+headerNameMap :: [(HeaderName, CI ByteString)]
 headerNameMap =
     [ (Accept, "Accept")
     , (AcceptEncoding, "Accept-Encoding")
@@ -129,52 +128,4 @@ headerNameMap =
     , (Via, "Via")
     , (Warning, "Warning")
     , (WWWAuthenticate, "WWW-Authenticate")
-    ]
-
-headerNameMapCI :: [(CI ByteString, HeaderName)]
-headerNameMapCI =
-    [ ("Accept", Accept)
-    , ("Accept-Encoding", AcceptEncoding)
-    , ("Accept-Language", AcceptLanguage)
-    , ("Alert-Info", AlertInfo)
-    , ("Allow", Allow)
-    , ("Authentication-Info", AuthenticationInfo)
-    , ("Authorization", Authorization)
-    , ("Call-ID", CallID)
-    , ("Call-Info", CallInfo)
-    , ("Contact", Contact)
-    , ("Content-Disposition", ContentDisposition)
-    , ("Content-Encoding", ContentEncoding)
-    , ("Content-Language", ContentLanguage)
-    , ("Content-Length", ContentLength)
-    , ("Content-Type", ContentType)
-    , ("CSeq", CSeq)
-    , ("Date", Date)
-    , ("Error-Info", ErrorInfo)
-    , ("Expires", Expires)
-    , ("From", From)
-    , ("In-Reply-To", InReplyTo)
-    , ("Max-Forwards", MaxForwards)
-    , ("MIME-Version", MIMEVersion)
-    , ("Min-Expires", MinExpires)
-    , ("Organization", Organization)
-    , ("Priority", Priority)
-    , ("Proxy-Authenticate", ProxyAuthenticate)
-    , ("Proxy-Authorization", ProxyAuthorization)
-    , ("Proxy-Require", ProxyRequire)
-    , ("Record-Route", RecordRoute)
-    , ("Reply-To", ReplyTo)
-    , ("Require", Require)
-    , ("Retry-After", RetryAfter)
-    , ("Route", Route)
-    , ("Server", Server)
-    , ("Subject", Subject)
-    , ("Supported", Supported)
-    , ("Timestamp", Timestamp)
-    , ("To", To)
-    , ("Unsupported", Unsupported)
-    , ("User-Agent", UserAgent)
-    , ("Via", Via)
-    , ("Warning", Warning)
-    , ("WWW-Authenticate", WWWAuthenticate)
     ]
