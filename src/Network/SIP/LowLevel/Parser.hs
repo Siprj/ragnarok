@@ -51,9 +51,9 @@ import Network.SIP.LowLevel.Type
         , OverLargeHeader
         )
     , Source
+    , leftoverSource
     , readSource
     , readSource'
-    , leftoverSource
     )
 
 
@@ -91,9 +91,9 @@ data THStatus = THStatus
 
 push :: Source -> THStatus -> ByteString -> IO [ByteString]
 push src (THStatus len lines prepend) bs'
-        -- Too many bytes
-        | len > maxTotalHeaderLength = throwIO OverLargeHeader
-        | otherwise = push' mnl
+    -- Too many bytes
+    | len > maxTotalHeaderLength = throwIO OverLargeHeader
+    | otherwise = push' mnl
   where
     bs = prepend bs'
     bsLen = S.length bs
@@ -104,12 +104,11 @@ push src (THStatus len lines prepend) bs'
         if bsLen > nl + 1 then
             let c = S.index bs (nl + 1)
                 b = case nl of
-                      0 -> True
-                      1 -> S.index bs 0 == 13
-                      _ -> False
+                    0 -> True
+                    1 -> S.index bs 0 == 13
+                    _ -> False
             in Just (nl, not b && (c == 32 || c == 9))
-            else
-            Just (nl, False)
+            else Just (nl, False)
 
     {-# INLINE push' #-}
     push' :: Maybe (Int, Bool) -> IO [ByteString]
@@ -137,18 +136,19 @@ push src (THStatus len lines prepend) bs'
             when (start < bsLen) $ leftoverSource src (SU.unsafeDrop start bs)
             return (lines [])
       -- more headers
-      | otherwise   = let len' = len + start
-                          lines' = lines . (line:)
-                          status = THStatus len' lines' id
-                      in if start < bsLen then
-                             -- more bytes in this chunk, push again
-                             let bs'' = SU.unsafeDrop start bs
-                              in push src status bs''
-                           else do
-                             -- no more bytes in this chunk, ask for more
-                             bst <- readSource' src
-                             when (S.null bs) $ throwIO IncompleteHeaders
-                             push src status bst
+      | otherwise   =
+          let len' = len + start
+              lines' = lines . (line:)
+              status = THStatus len' lines' id
+          in if start < bsLen then
+             -- more bytes in this chunk, push again
+              let bs'' = SU.unsafeDrop start bs
+              in push src status bs''
+           else do
+              -- no more bytes in this chunk, ask for more
+              bst <- readSource' src
+              when (S.null bs) $ throwIO IncompleteHeaders
+              push src status bst
       where
         start = end + 1 -- start of next chunk
         line = SU.unsafeTake (checkCR bs end) bs

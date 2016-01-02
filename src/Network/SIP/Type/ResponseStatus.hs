@@ -41,36 +41,11 @@ data UnknownResponseCode
     | Unknown_6xx
   deriving (Show, Eq)
 
---instance ToSip ResponseCode where
---    toSip = dropWhile (not . isDigit) . pack . showConstr . toConstr
---
---instance FromSip ResponseCode where
---    fromSip t = maybeToEither errorMsg .
---        lookup (Status t "") $ map swap responseStatusMap
---      where
---        errorMsg = "Cant parse Response Code: " <> t
-
 data Status = Status
     { statusCode :: Text
     , statusMsg :: Text
     }
   deriving (Show)
-
---instance Eq Status where
---    a == b =  statusCode a == statusCode b
---
---instance ToSip Status where
---    toSip s = statusCode s <> " " <> statusMsg s
---
---instance FromSip Status where
---    fromSip = aEToSipE . parseOnly parseStatus
---      where
---        parseStatus = Status
---            <$> parseCode
---            <*> (space *> takeText)
---
---        parseCode :: Parser Text
---        parseCode = pack <$> traverse (\_ -> digit) ([1..3] :: [Int])
 
 responseStatusMap :: [(ResponseCode, Status)]
 responseStatusMap =
