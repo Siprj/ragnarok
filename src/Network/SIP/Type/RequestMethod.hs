@@ -40,12 +40,3 @@ data RequestMethod
     | SUBSCRIBE
     | UPDATE
   deriving (Show, Eq, Enum, Data, Generic, NFData)
-
---instance ToSip RequestMethod where
---    toSip = pack . showConstr . toConstr
---
---instance FromSip RequestMethod where
---    fromSip t = maybeToEither errorMsg $
---        fromConstr <$> readConstr (dataTypeOf ACK) (unpack t)
---      where
---        errorMsg = "Error: Can't parse Request Method: " <> t

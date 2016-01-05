@@ -25,6 +25,8 @@ library
     Network.SIP.Parser
     Network.SIP.Parser.RequestLine
     Network.SIP.Parser.RequestMethod
+    Network.SIP.Parser.ResponseLine
+    Network.SIP.Parser.SipVersion
     Network.SIP.Parser.Uri
     Network.SIP.Type.Header
     Network.SIP.Type.Message
@@ -70,6 +72,8 @@ test-suite unit-tests
     Network.SIP.Parser
     Network.SIP.Parser.RequestLine
     Network.SIP.Parser.RequestMethod
+    Network.SIP.Parser.ResponseLine
+    Network.SIP.Parser.SipVersion
     Network.SIP.Parser.Uri
     Network.SIP.Type.Header
     Network.SIP.Type.Message

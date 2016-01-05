@@ -39,7 +39,7 @@ data Message =
         }
     | Response
         { rspStatus :: Status
-        , rqHeaders :: [Header]
-        , rqBody :: Maybe ByteString
+        , rspHeaders :: [Header]
+        , rspBody :: Maybe ByteString
         }
   deriving (Show, Generic, Data, NFData, Eq)

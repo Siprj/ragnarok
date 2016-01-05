@@ -69,7 +69,7 @@ type Header = (CI ByteString, ByteString)
 
 -- | Error types for bad 'SIP message.
 data InvalidMessage
-    = BadRequestLine String
+    = BadFirstLine String
     | BadProxyHeader String
     | ConnectionClosedByPeer
     | IncompleteHeaders
@@ -82,7 +82,7 @@ data InvalidMessage
 instance Show InvalidMessage where
     show (NotEnoughLines xs) = "Incomplete request headers, received: "
         <> show xs
-    show (BadRequestLine s) = "Invalid first line of request: " <> show s
+    show (BadFirstLine s) = "Invalid first line of message: " <> show s
     show NonHttp = "Request line specified a non-HTTP request"
     show IncompleteHeaders =
         "Request headers did not finish transmission"
