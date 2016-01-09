@@ -21,7 +21,7 @@ import Control.Monad ((>>=), return, fail)
 import Data.Attoparsec.ByteString.Char8 (char, decimal)
 import Data.Attoparsec.ByteString (Parser, takeByteString)
 import Data.Bool ((&&), otherwise)
-import Data.Function (($))
+import Data.Function (($), (.))
 import Data.Functor (fmap)
 import Data.List (lookup)
 import Data.Maybe (maybe)
@@ -31,6 +31,7 @@ import Data.Text.Encoding (decodeUtf8)
 import Data.Tuple (fst, snd)
 import Text.Show (show)
 
+import Network.SIP.Type.Message (MessageType(Response))
 import Network.SIP.Parser.SipVersion (sipVersionParser)
 import Network.SIP.Type.ResponseStatus
     ( Status(Status)
@@ -46,12 +47,12 @@ import Network.SIP.Type.ResponseStatus
     , responseStatusMap
     )
 
-firstLineParser :: Parser Status
+firstLineParser :: Parser MessageType
 firstLineParser = do
     _ <- sipVersionParser <* char ' '
     code <- (decimal <* char ' ') >>= typeStatusCode
     statusMsg <- fmap decodeUtf8 takeByteString
-    return $ Status code statusMsg
+    return . Response $ Status code statusMsg
   where
     typeStatusCode c =
         maybe (unknownStatusCode c) return $ lookup c $ fmap (\x -> (fst $ snd x, fst x)) responseStatusMap

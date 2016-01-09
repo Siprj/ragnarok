@@ -11,7 +11,7 @@
 --
 -- Big description.
 module Network.SIP.Type.Header
-    ( Header(..)
+    ( Header
     , HeaderName(..)
     , headerNameMap
     )
@@ -28,11 +28,7 @@ import Data.CaseInsensitive (CI)
 -- Performance test
 import Control.DeepSeq (NFData)
 
-data Header = Header
-    { fieldName :: HeaderName
-    , fieldValue :: Text
-    }
-  deriving (Show, Eq, Data, Generic, NFData)
+type Header = (HeaderName, Text)
 
 data HeaderName
     = Accept

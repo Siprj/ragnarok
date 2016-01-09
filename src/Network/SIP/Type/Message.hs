@@ -12,6 +12,7 @@
 -- Big description.
 module Network.SIP.Type.Message
     ( Message (..)
+    , MessageType (..)
     )
   where
 
@@ -30,16 +31,20 @@ import Network.SIP.Type.ResponseStatus (Status)
 -- Performance test
 import Control.DeepSeq (NFData)
 
-data Message =
+data MessageType =
     Request
         { rqMethod :: RequestMethod
         , rqUri :: Uri
-        , rqHeaders :: [Header]
-        , rqBody :: Maybe ByteString
         }
     | Response
         { rspStatus :: Status
-        , rspHeaders :: [Header]
-        , rspBody :: Maybe ByteString
+        }
+  deriving (Show, Generic, Data, NFData, Eq)
+
+data Message =
+    Message
+        { msgType :: MessageType
+        , msgHeaders :: [Header]
+        , msgBody :: Maybe ByteString
         }
   deriving (Show, Generic, Data, NFData, Eq)

@@ -15,6 +15,7 @@
 module Network.SIP.LowLevel.Parser
     ( headerLines
     , parseHeader
+    , readBody
     )
   where
 
@@ -29,6 +30,7 @@ import qualified Data.ByteString as S
     , drop
     , dropWhile
     , elemIndex
+    , empty
     , index
     , length
     , null
@@ -39,7 +41,7 @@ import Data.Eq ((==))
 import Data.Function (($), (.), id)
 import Data.Int (Int)
 import Data.Maybe (Maybe(Just, Nothing))
-import Data.Ord ((<), (>))
+import Data.Ord ((<), (>), (>=))
 import Prelude ((+), (-))
 import System.IO (IO)
 
@@ -155,3 +157,17 @@ checkCR :: ByteString -> Int -> Int
 checkCR bs pos = if pos > 0 && 13 == S.index bs p then p else pos -- 13 is CR
   where
     !p = pos - 1
+
+readBody :: Source -> Int -> IO ByteString
+readBody = readBody' S.empty
+
+readBody' :: ByteString -> Source -> Int -> IO ByteString
+readBody' msg src len = do
+    bs <- readSource src
+    let prepand' = S.append msg bs
+    if S.length prepand' >= len
+        then do
+            leftoverSource src $ SU.unsafeDrop len bs
+            return $ SU.unsafeTake len bs
+        else
+            readBody' bs src len

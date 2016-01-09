@@ -18,7 +18,7 @@ module Network.SIP.Parser.RequestLine
 
 import Control.Applicative ((<*))
 import Control.Monad (return, fail)
-import Data.Attoparsec.ByteString.Char8 (char, string, takeTill, (<?>))
+import Data.Attoparsec.ByteString.Char8 (char, takeTill, (<?>))
 import Data.Attoparsec.ByteString (Parser)
 import Data.Either (Either(Right, Left))
 import Data.Eq ((==))
@@ -26,17 +26,17 @@ import Data.Function (($), (.))
 import Data.Monoid ((<>))
 import Data.Text (unpack)
 
+import Network.SIP.Type.Message (MessageType(Request))
 import Network.SIP.Parser.RequestMethod (requestMethodParser)
 import Network.SIP.Parser.SipVersion (sipVersionParser)
 import Network.SIP.Parser.Uri (parseUri)
-import Network.SIP.Type.RequestMethod (RequestMethod)
 import Network.SIP.Type.Uri (Uri)
 
-firstLineParser :: Parser (RequestMethod, Uri)
+firstLineParser :: Parser MessageType
 firstLineParser = do
     method <- requestMethodParser <* char ' ' <?> "method parser"
     uri <- requestUri
-    return (method, uri)
+    return $ Request method uri
   where
     requestUri :: Parser Uri
     requestUri = do
