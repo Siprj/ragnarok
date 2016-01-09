@@ -1,7 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 -- |
--- Module:       TestCase.Network.SIP.Parser.Header
+-- Module:       TestCase.Network.SIP.LowLevel.Parser
 -- Description:  Tests of SIP types
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT
@@ -10,7 +10,7 @@
 -- Portability:  NoImplicitPrelude, OverloadedStrings
 --
 -- Unit and property tests for SIP types and their instances.
-module TestCase.Network.SIP.LLSIP.Parser (tests)
+module TestCase.Network.SIP.LowLevel.Parser (tests)
   where
 
 import Control.Monad (return)
@@ -26,8 +26,8 @@ import Test.Framework.Providers.HUnit (testCase)
 import Test.HUnit.Base (assertFailure)
 import Test.HUnit.Lang (Assertion)
 
-import Network.SIP.LLSIP.Parser (headerLines)
-import Network.SIP.LLSIP.Type (mkSource)
+import Network.SIP.LowLevel.Parser (headerLines)
+import Network.SIP.LowLevel.Type (mkSource)
 
 testHeaderLines :: ByteString -> [ByteString] -> Assertion
 testHeaderLines s hl = do

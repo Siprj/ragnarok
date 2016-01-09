@@ -13,9 +13,9 @@
 module TestCase.Network.SIP.Parser.Header (tests)
   where
 
-import Data.Attoparsec.ByteString (parseOnly)
+import Control.Monad ((>>=))
 import Data.ByteString (ByteString)
-import Data.Either (Either(Right))
+import Data.CaseInsensitive (CI)
 import Data.Function (($))
 import Data.Text (Text)
 
@@ -25,39 +25,38 @@ import Test.HUnit.Base ((@=?))
 import Test.HUnit.Lang (Assertion)
 
 import Network.SIP.Type.Header
-    ( Header(Header)
-    , HeaderName
+    ( HeaderName
         ( Accept
         , AcceptEncoding
         , Allow
         )
     )
-import Network.SIP.Parser.Header (headerParser)
+import Network.SIP.Parser (typeHeader)
 
-testHeaderParser :: ByteString -> HeaderName -> Text -> Assertion
-testHeaderParser s hn ht = Right (Header hn ht) @=? parseOnly headerParser s
+testHeaderParser :: (CI ByteString, ByteString) -> HeaderName -> Text -> Assertion
+testHeaderParser s hn ht = typeHeader s >>=  ((hn, ht) @=?)
 
 tests :: [Test]
 tests =
     [ testGroup "Basic header parser unit tests"
         [ testCase
             "header name and one space"
-                $ testHeaderParser "Accept: foo bar\r\n" Accept "foo bar"
+                $ testHeaderParser ("Accept", "foo bar") Accept "foo bar"
         , testCase
             "header name and multiple spaces"
-                $ testHeaderParser "Accept:    foo bar\r\n" Accept "foo bar"
+                $ testHeaderParser ("Accept", "foo bar") Accept "foo bar"
         , testCase
             "header name with disgusting cases"
-                $ testHeaderParser "acCePt: foo bar\r\n" Accept "foo bar"
+                $ testHeaderParser ("acCePt", "foo bar") Accept "foo bar"
         , testCase
             "header name with disgusting cases"
-                $ testHeaderParser "acCePt: foo bar\r\n" Accept "foo bar"
+                $ testHeaderParser ("acCePt", "foo bar") Accept "foo bar"
         , testCase
             "some another header name"
-                $ testHeaderParser "Allow: foo bar\r\n" Allow "foo bar"
+                $ testHeaderParser ("Allow", "foo bar") Allow "foo bar"
         , testCase
             "some another header name with dash"
-                $ testHeaderParser "Accept-Encoding: foo bar\r\n"
+                $ testHeaderParser ("Accept-Encoding", "foo bar")
                     AcceptEncoding "foo bar"
         ]
     ]

@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 -- |
@@ -8,8 +9,11 @@
 --
 -- Big description.
 module Network.SIP.Parser
-    ( typeHeader
-    , parseSipMessage
+    ( parseSipMessage
+
+#ifdef EXPORT_INTERNALS
+    , typeHeader
+#endif
     )
   where
 
