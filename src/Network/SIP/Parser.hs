@@ -1,8 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE BangPatterns #-}
 -- |
 -- Module:       Network.SIP.Parser
 -- Description:
@@ -17,7 +14,7 @@ module Network.SIP.Parser
   where
 
 import Control.Exception (throwIO)
-import Control.Monad ((>>=), return, sequence)
+import Control.Monad ((>>=), return, sequence, liftM)
 import Control.Applicative ((<|>))
 import Data.Attoparsec.ByteString (parseOnly)
 import qualified Data.Attoparsec.Text as AT (parseOnly, decimal)
@@ -53,7 +50,7 @@ import qualified Network.SIP.Parser.ResponseLine as Resp (firstLineParser)
 typeHeader :: LL.Header -> IO Header
 typeHeader (h, v) =
     maybe (throwIO WrongHeader) return $
-        fmap (\x -> (x, (decodeUtf8 v))) .
+        fmap (\x -> (x, decodeUtf8 v)) .
             lookup h . fmap swap $ headerNameMap
 
 parseSipMessage :: Source -> IO Message
@@ -63,7 +60,7 @@ parseSipMessage src = do
     body <- maybe (return Nothing) readBody' $ lookup ContentLength ths
     return $ Message mt ths body
   where
-    readBody' t  = validateContentLength t >>= readBody src >>= return . Just
+    readBody' t = liftM Just (validateContentLength t >>= readBody src)
     validateContentLength :: Text -> IO Int
     validateContentLength =
         either (\_ -> throwIO BadContentLength) return

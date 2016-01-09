@@ -1,5 +1,3 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 -- |
@@ -60,7 +58,7 @@ uriParser = Uri
         <|> fmap (const SIPS) (string "sips:")
 
     userParser :: Parser (Maybe Text)
-    userParser = option Nothing . fmap Just . fmap pack $
+    userParser = option Nothing . fmap (Just . pack) $
     -- TODO: List of characters allowed in user is kind of weird.
     -- It should be reviewed in future.
         many1 (satisfy $ inClass "a-zA-Z0-9;:&=+$,._%") <* string "@"

@@ -1,8 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE BangPatterns #-}
 -- |
 -- Module:       Network.SIP.LowLevel.Parser
@@ -20,8 +17,7 @@ module Network.SIP.LowLevel.Parser
   where
 
 import Control.Exception (throwIO)
-import Control.Monad (return)
-import Control.Monad (when)
+import Control.Monad (return, when)
 import Data.Bool (Bool(True, False), (||), (&&), not, otherwise)
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as S

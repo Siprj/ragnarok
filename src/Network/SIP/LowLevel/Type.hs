@@ -1,9 +1,6 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE BangPatterns #-}
 -- |
 -- Module:       Network.SIP.LowLevel.Type
 -- Description:  Types for low level parser
@@ -60,7 +57,7 @@ readSource' :: Source -> IO ByteString
 readSource' (Source _ func) = func
 
 leftoverSource :: Source -> ByteString -> IO ()
-leftoverSource (Source ref _) bs = writeIORef ref bs
+leftoverSource (Source ref _) = writeIORef ref
 
 readLeftoverSource :: Source -> IO ByteString
 readLeftoverSource (Source ref _) = readIORef ref
@@ -83,7 +80,7 @@ data InvalidMessage
 instance Show InvalidMessage where
     show (NotEnoughLines xs) = "Incomplete request headers, received: "
         <> show xs
-    show (BadContentLength) = "Content Length is isn wrong format"
+    show BadContentLength = "Content Length is isn wrong format"
     show (BadFirstLine s) = "Invalid first line of message: " <> show s
     show NonSip = "Request/Response line specified a non-SIP message"
     show IncompleteHeaders =
