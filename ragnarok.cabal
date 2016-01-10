@@ -41,6 +41,7 @@ library
     Network.SIP.Type.RequestMethod
     Network.SIP.Type.ResponseStatus
     Network.SIP.Type.Uri
+    Network.SIP.Utils
 
   -- other-modules:
 
@@ -89,6 +90,7 @@ test-suite unit-tests
     Network.SIP.Type.RequestMethod
     Network.SIP.Type.ResponseStatus
     Network.SIP.Type.Uri
+    Network.SIP.Utils
     TestCase.Network.SIP.LowLevel.Parser
     TestCase.Network.SIP.Parser.Header
     TestCase.Network.SIP.Parser.RequestMethod
