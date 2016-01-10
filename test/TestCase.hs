@@ -22,6 +22,8 @@ import qualified TestCase.Network.SIP.Parser.Uri as
     Parser.Uri (tests)
 import qualified TestCase.Network.SIP.LowLevel.Parser as
     LowLevel.Parser (tests)
+import qualified TestCase.Network.SIP.Parser as
+    Parser (tests)
 
 tests :: [Test]
 tests =
@@ -30,4 +32,5 @@ tests =
           Parser.RequestMethod.tests
     , testGroup "TestCase.Network.SIP.Parser.Uri" Parser.Uri.tests
     , testGroup "TestCase.Network.SIP.LowLevel.Parser" LowLevel.Parser.tests
+    , testGroup "TestCase.Network.SIP.Parser" Parser.tests
     ]

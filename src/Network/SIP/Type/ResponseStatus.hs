@@ -20,7 +20,7 @@ module Network.SIP.Type.ResponseStatus
 
 import Data.Data (Data)
 import Data.Int (Int)
-import Data.Eq (Eq)
+import Data.Eq (Eq, (==))
 import Data.Text (Text)
 import GHC.Generics (Generic)
 import Text.Show (Show)
@@ -52,7 +52,10 @@ data Status = Status
     { statusCode :: ResponseCode
     , statusMsg :: Text
     }
-  deriving (Show, Eq, Data, Generic, NFData)
+  deriving (Show, Data, Generic, NFData)
+
+instance Eq Status where
+    a == b = statusCode a == statusCode b
 
 -- | This list map's ResponseCode to its code value and descriptoin text.
 -- (ResponseCode, (<code> :: Text, <descriptoin message> :: Text))
