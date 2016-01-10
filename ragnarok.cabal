@@ -14,9 +14,17 @@ maintainer:          sipr.jan@gmail.com
 category:            Network
 build-type:          Simple
 copyright:           Copyright: (c) 2015 Jan Sipr
+synopsis:
+    Ragnarok is SIP stack written in Haskell.
+description:
+    Ragnarok is SIP stack written in Haskell. It tryas to take some good ideas 
+    from warp.
 
 cabal-version:       >=1.10
 
+source-repository head
+    type: git
+    location: git@github.com:Siprj/ragnarok.git
 
 library
   exposed-modules:
