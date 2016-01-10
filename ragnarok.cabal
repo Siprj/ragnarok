@@ -46,6 +46,7 @@ library
     , case-insensitive
     , text
     , network-uri
+    , transformers
 
     -- for porformance tests
     , deepseq
@@ -96,6 +97,7 @@ test-suite unit-tests
     , case-insensitive
     , network-uri
     , text
+    , transformers
 
     -- for porformance tests
     , deepseq

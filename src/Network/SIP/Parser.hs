@@ -18,7 +18,9 @@ module Network.SIP.Parser
   where
 
 import Control.Exception (throwIO)
-import Control.Monad ((>>=), return, sequence, liftM)
+import Control.Monad ((>>=), return, sequence, fail)
+import Control.Monad.Trans.Maybe (MaybeT, runMaybeT)
+import Control.Monad.IO.Class (liftIO)
 import Control.Applicative ((<|>))
 import Data.Attoparsec.ByteString (parseOnly)
 import qualified Data.Attoparsec.Text as AT (parseOnly, decimal)
@@ -61,12 +63,24 @@ parseSipMessage :: Source -> IO Message
 parseSipMessage src = do
     (mt, bhls) <- headerLines src >>= parseFirstLine
     ths <- sequence . fmap typeHeader $ fmap LL.parseHeader bhls
-    body <- maybe (return Nothing) readBody' $ lookup ContentLength ths
+    body <- runMaybeT . readBody' $ lookup ContentLength ths
     return $ Message mt ths body
   where
-    readBody' t = liftM Just (validateContentLength t >>= readBody src)
-    validateContentLength :: Text -> IO Int
-    validateContentLength =
+    readBody' :: Maybe Text -> MaybeT IO ByteString
+    readBody' t = toMaybeT t >>= (liftIO . decodeContentLength)
+            >>= validateContentLength >>= (liftIO . (readBody src))
+
+    -- TODO: Length validation against packet size.
+    -- validateContentLength :: Int -> MaybeT IO Int
+    validateContentLength 0 = fail "Content Length 0 mean no body at all"
+    validateContentLength a = return a
+
+    -- toMaybeT :: Maybe a -> MaybeT IO a
+    toMaybeT (Just a) = return a
+    toMaybeT Nothing = fail "Nothing"
+
+    decodeContentLength :: Text -> IO Int
+    decodeContentLength =
         either (\_ -> throwIO BadContentLength) return
             . AT.parseOnly AT.decimal
 
