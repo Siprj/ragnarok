@@ -17,7 +17,7 @@ copyright:           Copyright: (c) 2015 Jan Sipr
 synopsis:
     Ragnarok is SIP stack written in Haskell.
 description:
-    Ragnarok is SIP stack written in Haskell. It tryas to take some good ideas 
+    Ragnarok is SIP stack written in Haskell. It tryas to take some good ideas
     from warp.
 
 cabal-version:       >=1.10
@@ -37,9 +37,12 @@ library
     Network.SIP.Parser.SipVersion
     Network.SIP.Parser.Uri
     Network.SIP.Type.Header
+    Network.SIP.Type.HeaderValues
+    Network.SIP.Type.Host
     Network.SIP.Type.Message
     Network.SIP.Type.RequestMethod
     Network.SIP.Type.ResponseStatus
+    Network.SIP.Type.TransportProtocol
     Network.SIP.Type.Uri
     Network.SIP.Utils
 
@@ -86,9 +89,12 @@ test-suite unit-tests
     Network.SIP.Parser.SipVersion
     Network.SIP.Parser.Uri
     Network.SIP.Type.Header
+    Network.SIP.Type.HeaderValues
+    Network.SIP.Type.Host
     Network.SIP.Type.Message
     Network.SIP.Type.RequestMethod
     Network.SIP.Type.ResponseStatus
+    Network.SIP.Type.TransportProtocol
     Network.SIP.Type.Uri
     Network.SIP.Utils
     TestCase.Network.SIP.LowLevel.Parser
