@@ -40,6 +40,33 @@ data Accept = Accept
 data AcceptEncoding = AcceptEncoding
   deriving (Show, Eq, Data, Generic, NFData)
 
+data AccepLanguage = AcceptLanguage [Text]
+  deriving (Show, Eq, Data, Generic, NFData)
+
+-- | Weird feature which can be a security risc. See RFC3261 for more info.
+data AlertInfo = AlertInfo Text
+  deriving (Show, Eq, Data, Generic, NFData)
+
+-- | Identify which method are supported by UA.
+data Allow = Allow [RequestMethod]
+  deriving (Show, Eq, Data, Generic, NFData)
+
+-- | Header for HTTP Digest authentication.
+data AuthenticationInfo = AuthenticationInfo Text
+  deriving (Show, Eq, Data, Generic, NFData)
+
+-- | Also used for HTTP Digest authentication
+data Authorization = Authorization Text
+  deriving (Show, Eq, Data, Generic, NFData)
+
+-- | Call id is unique call identifier through space and time.
+data CallID = CallID Text
+  deriving (Show, Eq, Data, Generic, NFData)
+
+-- | Additional information about callee or caller
+data CallInfo = CallInfo [Text]
+  deriving (Show, Eq, Data, Generic, NFData)
+
 -- | See https://tools.ietf.org/html/rfc3261#page-167 for mor details.
 data Contact = Contact
     { cDisplayName :: Text
