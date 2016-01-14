@@ -78,10 +78,6 @@ data Contact = Contact
 -- | Only one content type is supported for now: "application/sdp"
 data ContentType = ContentType
 
--- | Call id is unique call identifier through space and time.
-data CallID = Text
-  deriving (Show, Eq, Data, Generic, NFData)
-
 -- | CSeq takes word32 (Request sequence number) and request method which
 -- started sip transaction see https://tools.ietf.org/html/rfc3261#page-38 for
 -- more details.
