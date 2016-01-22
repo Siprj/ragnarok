@@ -25,7 +25,7 @@ import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.HUnit (testCase)
 import Test.HUnit.Base ((@=?))
 
-import Network.SIP.LowLevel.Type (mkSource)
+import Network.SIP.Type.Source (mkSource)
 import Network.SIP.Parser (parseSipMessage)
 import Network.SIP.Type.Message
     ( MessageType(Request, Response)

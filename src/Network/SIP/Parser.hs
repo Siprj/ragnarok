@@ -37,9 +37,13 @@ import Data.Tuple (curry, swap)
 import System.IO (IO)
 import Text.Show (show)
 
-import Network.SIP.LowLevel.Type
-    ( InvalidMessage(WrongHeader, BadFirstLine, BadContentLength)
-    , Source
+import Network.SIP.Type.Source (Source)
+import Network.SIP.Type.Error
+    ( InvalidMessage
+        ( WrongHeader
+        , BadFirstLine
+        , BadContentLength
+        )
     )
 import Network.SIP.Type.Header
     ( Header
@@ -47,13 +51,13 @@ import Network.SIP.Type.Header
     , headerNameMap
     )
 import Network.SIP.Type.Message (MessageType, Message(Message))
-import qualified Network.SIP.LowLevel.Parser as LL (parseHeader)
-import qualified Network.SIP.LowLevel.Type as LL (Header)
-import Network.SIP.LowLevel.Parser (headerLines, readBody)
+import qualified Network.SIP.Parser.Line as LL (parseHeader)
+import qualified Network.SIP.Type.Line as LL (Line)
+import Network.SIP.Parser.Line (headerLines, readBody)
 import qualified Network.SIP.Parser.RequestLine as Req (firstLineParser)
 import qualified Network.SIP.Parser.ResponseLine as Resp (firstLineParser)
 
-typeHeader :: LL.Header -> IO Header
+typeHeader :: LL.Line -> IO Header
 typeHeader (h, v) =
     maybe (throwIO WrongHeader) return $
         fmap (\x -> (x, decodeUtf8 v)) .

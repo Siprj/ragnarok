@@ -2,14 +2,16 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE BangPatterns #-}
 -- |
--- Module:       Network.SIP.LowLevel.Parser
--- Description:  Low level parser
+-- Module:       Network.SIP.Parser.Line
+-- Description:  Low level line parser.
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT
 --
--- Low level parser taken form warp package
+-- This low level parse is supose to be fast and it supose to quicly terminate
+-- commection if the incomming data are somehow demaged.
+-- This parser is taken from warp package
 -- https://github.com/yesodweb/wai/blob/master/warp/Network/Wai/Handler/Warp/Request.hs
-module Network.SIP.LowLevel.Parser
+module Network.SIP.Parser.Line
     ( headerLines
     , parseHeader
     , readBody
@@ -41,17 +43,19 @@ import Data.Ord ((<), (>), (>=))
 import Prelude ((+), (-))
 import System.IO (IO)
 
-import Network.SIP.LowLevel.Type
-    ( Header
-    , InvalidMessage
+import Network.SIP.Type.Line (Line)
+import Network.SIP.Type.Source
+    ( Source
+    , leftoverSource
+    , readSource
+    , readSource'
+    )
+import Network.SIP.Type.Error
+    ( InvalidMessage
         ( ConnectionClosedByPeer
         , IncompleteHeaders
         , OverLargeHeader
         )
-    , Source
-    , leftoverSource
-    , readSource
-    , readSource'
     )
 
 -- | Acording to rfc3261 SIP message length MUST NOT be greater than UDP
@@ -66,7 +70,7 @@ headerLines src = do
         then throwIO ConnectionClosedByPeer
         else push src (THStatus 0 id id) bs
 
-parseHeader :: ByteString -> Header
+parseHeader :: ByteString -> Line
 parseHeader s =
     let (k, rest) = S.break (== 58) s -- ':'
         rest' = S.dropWhile (\c -> c == 32 || c == 9) $ S.drop 1 rest

@@ -2,67 +2,22 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 -- |
--- Module:       Network.SIP.LowLevel.Type
--- Description:  Types for low level parser
+-- Module:       Network.SIP.Type.Error
+-- Description:  Type used for error exceptions raised from whole SIP.
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT
 --
--- Most of these types ware taken from warp package
+-- Type used for error exceptions raised from whole SIP.
+-- This was taken from warp package and slightly rewriten
 -- https://github.com/yesodweb/wai/blob/master/warp/Network/Wai/Handler/Warp/Types.hs
-module Network.SIP.LowLevel.Type
-    ( Header
-    , Source(..)
-    , InvalidMessage(..)
-    , mkSource
-    , readSource
-    , readSource'
-    , leftoverSource
-    , readLeftoverSource
-    )
-  where
+module Network.SIP.Type.Error where
 
 import Control.Exception (Exception)
-import Control.Monad (return)
-import Data.ByteString (ByteString)
-import Data.CaseInsensitive (CI)
 import Data.Typeable (Typeable)
-import Data.IORef (IORef, readIORef, writeIORef, newIORef)
 import Data.Eq (Eq)
 import Data.Monoid ((<>))
 import Text.Show (Show, show)
-import GHC.Base (($!))
 import Data.String (String)
-import qualified Data.ByteString as S (empty, null)
-import System.IO (IO)
-
--- | Type for input streaming.
-data Source = Source !(IORef ByteString) !(IO ByteString)
-
-mkSource :: IO ByteString -> IO Source
-mkSource func = do
-    ref <- newIORef S.empty
-    return $! Source ref func
-
-readSource :: Source -> IO ByteString
-readSource (Source ref func) = do
-    bs <- readIORef ref
-    if S.null bs
-        then func
-        else do
-            writeIORef ref S.empty
-            return bs
-
--- | Read from a Source, ignoring any leftovers.
-readSource' :: Source -> IO ByteString
-readSource' (Source _ func) = func
-
-leftoverSource :: Source -> ByteString -> IO ()
-leftoverSource (Source ref _) = writeIORef ref
-
-readLeftoverSource :: Source -> IO ByteString
-readLeftoverSource (Source ref _) = readIORef ref
-
-type Header = (CI ByteString, ByteString)
 
 -- | Error types for bad 'SIP message.
 data InvalidMessage

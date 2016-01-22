@@ -26,8 +26,8 @@ import Test.Framework.Providers.HUnit (testCase)
 import Test.HUnit.Base (assertFailure)
 import Test.HUnit.Lang (Assertion)
 
-import Network.SIP.LowLevel.Parser (headerLines)
-import Network.SIP.LowLevel.Type (mkSource)
+import Network.SIP.Parser.Line (headerLines)
+import Network.SIP.Type.Source (mkSource)
 
 testHeaderLines :: ByteString -> [ByteString] -> Assertion
 testHeaderLines s hl = do

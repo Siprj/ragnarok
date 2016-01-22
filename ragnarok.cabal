@@ -28,20 +28,22 @@ source-repository head
 
 library
   exposed-modules:
-    Network.SIP.LowLevel.Parser
-    Network.SIP.LowLevel.Type
     Network.SIP.Parser
+    Network.SIP.Parser.Line
     Network.SIP.Parser.RequestLine
     Network.SIP.Parser.RequestMethod
     Network.SIP.Parser.ResponseLine
     Network.SIP.Parser.SipVersion
     Network.SIP.Parser.Uri
+    Network.SIP.Type.Error
     Network.SIP.Type.Header
     Network.SIP.Type.HeaderValues
     Network.SIP.Type.Host
+    Network.SIP.Type.Line
     Network.SIP.Type.Message
     Network.SIP.Type.RequestMethod
     Network.SIP.Type.ResponseStatus
+    Network.SIP.Type.Source
     Network.SIP.Type.TransportProtocol
     Network.SIP.Type.Uri
     Network.SIP.Utils
@@ -80,20 +82,22 @@ test-suite unit-tests
   main-is:              unit-tests.hs
 
   other-modules:
-    Network.SIP.LowLevel.Parser
-    Network.SIP.LowLevel.Type
     Network.SIP.Parser
+    Network.SIP.Parser.Line
     Network.SIP.Parser.RequestLine
     Network.SIP.Parser.RequestMethod
     Network.SIP.Parser.ResponseLine
     Network.SIP.Parser.SipVersion
     Network.SIP.Parser.Uri
+    Network.SIP.Type.Error
     Network.SIP.Type.Header
     Network.SIP.Type.HeaderValues
     Network.SIP.Type.Host
+    Network.SIP.Type.Line
     Network.SIP.Type.Message
     Network.SIP.Type.RequestMethod
     Network.SIP.Type.ResponseStatus
+    Network.SIP.Type.Source
     Network.SIP.Type.TransportProtocol
     Network.SIP.Type.Uri
     Network.SIP.Utils
