@@ -26,6 +26,8 @@ import qualified TestCase.Network.SIP.Parser.Uri as
     Parser.Uri (tests)
 import qualified TestCase.Network.SIP.Serialization.Header as
     Serialization.Header (tests)
+import qualified TestCase.Network.SIP.Serialization.Uri as
+    Serialization.Uri (tests)
 
 tests :: [Test]
 tests =
@@ -35,5 +37,8 @@ tests =
     , testGroup "TestCase.Network.SIP.Parser.RequestMethod"
         Parser.RequestMethod.tests
     , testGroup "TestCase.Network.SIP.Parser.Uri" Parser.Uri.tests
-    , testGroup "TestCase.Network.SIP.Serialization" Serialization.Header.tests
+    , testGroup "TestCase.Network.SIP.Serialization.Header"
+        Serialization.Header.tests
+    , testGroup "TestCase.Network.SIP.Serialization.Uri"
+        Serialization.Uri.tests
     ]
