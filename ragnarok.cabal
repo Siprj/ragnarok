@@ -103,8 +103,8 @@ test-suite unit-tests
     Network.SIP.Type.TransportProtocol
     Network.SIP.Type.Uri
     Network.SIP.Utils
-    TestCase.Network.SIP.LowLevel.Parser
     TestCase.Network.SIP.Parser.Header
+    TestCase.Network.SIP.Parser.Line
     TestCase.Network.SIP.Parser.RequestMethod
     TestCase.Network.SIP.Parser.Uri
     TestCase.Network.SIP.Serialization.Header
