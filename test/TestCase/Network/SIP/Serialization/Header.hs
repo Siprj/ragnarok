@@ -3,7 +3,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       TestCase.Network.SIP.Serialization.Header
--- Description:  SIP message serialization test
+-- Description:  Test of SIP message serialization.
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT
 module TestCase.Network.SIP.Serialization.Header (tests)

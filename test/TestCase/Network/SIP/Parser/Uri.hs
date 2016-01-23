@@ -2,14 +2,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       TestCase.Network.SIP.Parser.Header
--- Description:  Tests of SIP types
+-- Description:  Test of URI parser.
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT
---
--- Stability:    stable
--- Portability:  NoImplicitPrelude, OverloadedStrings
---
--- Unit and property tests for SIP types and their instances.
 module TestCase.Network.SIP.Parser.Uri (tests)
   where
 

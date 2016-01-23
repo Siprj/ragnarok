@@ -4,14 +4,9 @@
 {-# LANGUAGE RecordWildCards #-}
 -- |
 -- Module:       TestCase.Network.SIP.Parser
--- Description:
+-- Description:  Test of SIP parser (whole messages are tested).
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT
---
--- Stability:    stable
--- Portability:  NoImplicitPrelude, OverloadedStrings
---
---
 module TestCase.Network.SIP.Parser (tests)
   where
 

@@ -3,11 +3,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Parser
--- Description:
+-- Description:  SIP message parser.
 -- Copyright:    Copyright (c) 2015 Jan Sipr
 -- License:      MIT
---
--- Big description.
 module Network.SIP.Parser
     ( parseSipMessage
 
