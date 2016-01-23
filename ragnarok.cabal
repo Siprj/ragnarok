@@ -35,6 +35,7 @@ library
     Network.SIP.Parser.ResponseLine
     Network.SIP.Parser.SipVersion
     Network.SIP.Parser.Uri
+    Network.SIP.Serialization.Header
     Network.SIP.Type.Error
     Network.SIP.Type.Header
     Network.SIP.Type.HeaderValues
@@ -89,6 +90,7 @@ test-suite unit-tests
     Network.SIP.Parser.ResponseLine
     Network.SIP.Parser.SipVersion
     Network.SIP.Parser.Uri
+    Network.SIP.Serialization.Header
     Network.SIP.Type.Error
     Network.SIP.Type.Header
     Network.SIP.Type.HeaderValues
@@ -105,6 +107,7 @@ test-suite unit-tests
     TestCase.Network.SIP.Parser.Header
     TestCase.Network.SIP.Parser.RequestMethod
     TestCase.Network.SIP.Parser.Uri
+    TestCase.Network.SIP.Serialization.Header
 
   default-language:     Haskell2010
   other-extensions:
