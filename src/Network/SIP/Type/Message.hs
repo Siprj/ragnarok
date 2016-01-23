@@ -41,10 +41,9 @@ data MessageType =
         }
   deriving (Show, Generic, Data, NFData, Eq)
 
-data Message =
-    Message
-        { msgType :: MessageType
-        , msgHeaders :: [Header]
-        , msgBody :: Maybe ByteString
-        }
+data Message = Message
+    { msgType :: MessageType
+    , msgHeaders :: [Header]
+    , msgBody :: Maybe ByteString
+    }
   deriving (Show, Generic, Data, NFData, Eq)

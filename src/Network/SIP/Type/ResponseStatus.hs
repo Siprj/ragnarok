@@ -68,3 +68,4 @@ responseStatusMap =
     , (Unauthorized_401, (401, "Unauthorized"))
     , (Forbidden_403, (403, "Forbidden"))
     ]
+-- TODO: See if this table can be rewritten with type families.
