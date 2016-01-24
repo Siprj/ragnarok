@@ -2,11 +2,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Parser.ResponseLine
--- Description:
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Description:  Response line parser.
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
---
--- Big description.
 module Network.SIP.Parser.ResponseLine
     ( firstLineParser
     )
@@ -27,11 +25,11 @@ import Data.Text.Encoding (decodeUtf8)
 import Data.Tuple (fst, snd)
 import Text.Show (show)
 
-import Network.SIP.Type.Message (MessageType(Response))
 import Network.SIP.Parser.SipVersion (sipVersionParser)
+import Network.SIP.Type.Message (MessageType(Response))
 import Network.SIP.Type.ResponseStatus
-    ( Status(Status)
-    , ResponseCode(Unknown)
+    ( ResponseCode(Unknown)
+    , Status(Status)
     , UnknownResponseCode
         ( Unknown_1xx
         , Unknown_2xx

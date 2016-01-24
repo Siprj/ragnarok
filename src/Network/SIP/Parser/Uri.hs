@@ -3,16 +3,15 @@
 -- |
 -- Module:       Network.SIP.Parser.URI
 -- Description:  Uri parser with sip specific properties.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 --
 -- Uri from from Network.URI is not able correctly parser sip:name@host format.
--- This parser is here to fill the gap. The RFC3986 is really complicated so
+-- This parser is here to fill in the gap. The RFC3986 is really complicated so
 -- I implemented only relevant parts of the RFC.
 --
--- I don't remember to see any query or fragments in SIP packets. Use of these
--- part of URI is not described in RFC3261 at all. This is my reason to not
--- implement them in parser.
+-- I don't remember to see any query or fragments in SIP packets.  This is my
+-- reason to not implement them in parser.
 module Network.SIP.Parser.Uri
     ( parseUri
     )

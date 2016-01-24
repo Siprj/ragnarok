@@ -4,7 +4,7 @@
 -- |
 -- Module:       Network.SIP.Parser.Line
 -- Description:  Low level line parser.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 --
 -- This low level parse is supose to be fast and it supose to quicly terminate
@@ -43,19 +43,19 @@ import Data.Ord ((<), (>), (>=))
 import Prelude ((+), (-))
 import System.IO (IO)
 
-import Network.SIP.Type.Line (Line)
-import Network.SIP.Type.Source
-    ( Source
-    , leftoverSource
-    , readSource
-    , readSource'
-    )
 import Network.SIP.Type.Error
     ( InvalidMessage
         ( ConnectionClosedByPeer
         , IncompleteHeaders
         , OverLargeHeader
         )
+    )
+import Network.SIP.Type.Line (Line)
+import Network.SIP.Type.Source
+    ( Source
+    , leftoverSource
+    , readSource
+    , readSource'
     )
 
 -- | Acording to rfc3261 SIP message length MUST NOT be greater than UDP
@@ -76,8 +76,6 @@ parseHeader s =
         rest' = S.dropWhile (\c -> c == 32 || c == 9) $ S.drop 1 rest
      in (mk k, rest')
 
-----------------------------------------------------------------
-
 type BSEndo = ByteString -> ByteString
 type BSEndoList = [ByteString] -> [ByteString]
 
@@ -85,8 +83,6 @@ data THStatus = THStatus
     {-# UNPACK #-} !Int -- running total byte count
     BSEndoList -- previously parsed lines
     BSEndo -- bytestrings to be prepended
-
-----------------------------------------------------------------
 
 push :: Source -> THStatus -> ByteString -> IO [ByteString]
 push src (THStatus len lines prepend) bs'

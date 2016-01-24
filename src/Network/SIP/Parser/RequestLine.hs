@@ -2,11 +2,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Parser.RequestLine
--- Description:
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Description:  Request line parser.
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
---
--- Big description.
 module Network.SIP.Parser.RequestLine
     ( firstLineParser
     )
@@ -22,10 +20,10 @@ import Data.Function (($), (.))
 import Data.Monoid ((<>))
 import Data.Text (unpack)
 
-import Network.SIP.Type.Message (MessageType(Request))
 import Network.SIP.Parser.RequestMethod (requestMethodParser)
 import Network.SIP.Parser.SipVersion (sipVersionParser)
 import Network.SIP.Parser.Uri (parseUri)
+import Network.SIP.Type.Message (MessageType(Request))
 import Network.SIP.Type.Uri (Uri)
 
 firstLineParser :: Parser MessageType

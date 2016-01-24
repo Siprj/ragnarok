@@ -4,7 +4,7 @@
 -- |
 -- Module:       Network.SIP.Parser
 -- Description:  SIP message parser.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module Network.SIP.Parser
     ( parseSipMessage
@@ -15,13 +15,12 @@ module Network.SIP.Parser
     )
   where
 
+import Control.Applicative ((<|>))
 import Control.Exception (throwIO)
+import Control.Monad.IO.Class (liftIO)
 import Control.Monad ((>>=), return, sequence, fail)
 import Control.Monad.Trans.Maybe (MaybeT, runMaybeT)
-import Control.Monad.IO.Class (liftIO)
-import Control.Applicative ((<|>))
 import Data.Attoparsec.ByteString (parseOnly)
-import qualified Data.Attoparsec.Text as AT (parseOnly, decimal)
 import Data.ByteString (ByteString)
 import Data.Either (either)
 import Data.Function (($), (.))
@@ -32,16 +31,13 @@ import Data.Maybe (Maybe(Nothing, Just), maybe)
 import Data.Text.Encoding (decodeUtf8)
 import Data.Text (Text)
 import Data.Tuple (curry, swap)
+import qualified Data.Attoparsec.Text as AT (parseOnly, decimal)
 import System.IO (IO)
 import Text.Show (show)
 
-import Network.SIP.Type.Source (Source)
+import Network.SIP.Parser.Line (headerLines, readBody)
 import Network.SIP.Type.Error
-    ( InvalidMessage
-        ( WrongHeader
-        , BadFirstLine
-        , BadContentLength
-        )
+    ( InvalidMessage(WrongHeader, BadFirstLine, BadContentLength)
     )
 import Network.SIP.Type.Header
     ( Header
@@ -49,11 +45,11 @@ import Network.SIP.Type.Header
     , headerNameMap
     )
 import Network.SIP.Type.Message (MessageType, Message(Message))
+import Network.SIP.Type.Source (Source)
 import qualified Network.SIP.Parser.Line as LL (parseHeader)
-import qualified Network.SIP.Type.Line as LL (Line)
-import Network.SIP.Parser.Line (headerLines, readBody)
 import qualified Network.SIP.Parser.RequestLine as Req (firstLineParser)
 import qualified Network.SIP.Parser.ResponseLine as Resp (firstLineParser)
+import qualified Network.SIP.Type.Line as LL (Line)
 
 typeHeader :: LL.Line -> IO Header
 typeHeader (h, v) =
