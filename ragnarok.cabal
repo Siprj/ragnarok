@@ -35,6 +35,7 @@ library
     Network.SIP.Parser.ResponseLine
     Network.SIP.Parser.SipVersion
     Network.SIP.Parser.Uri
+    Network.SIP.Serialization.FirstLine
     Network.SIP.Serialization.Header
     Network.SIP.Serialization.RequestMethod
     Network.SIP.Serialization.Uri
@@ -93,6 +94,7 @@ test-suite unit-tests
     Network.SIP.Parser.ResponseLine
     Network.SIP.Parser.SipVersion
     Network.SIP.Parser.Uri
+    Network.SIP.Serialization.FirstLine
     Network.SIP.Serialization.Header
     Network.SIP.Serialization.RequestMethod
     Network.SIP.Serialization.Uri
