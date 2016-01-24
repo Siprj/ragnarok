@@ -1,6 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveDataTypeable #-}
 -- |
 -- Module:       Network.SIP.Type.Line
 -- Description:  Small type representing one untyped line of sip header.

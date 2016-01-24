@@ -66,7 +66,7 @@ parseSipMessage src = do
   where
     readBody' :: Maybe Text -> MaybeT IO ByteString
     readBody' t = toMaybeT t >>= (liftIO . decodeContentLength)
-            >>= validateContentLength >>= (liftIO . (readBody src))
+            >>= validateContentLength >>= (liftIO . readBody src)
 
     -- TODO: Length validation against packet size.
     -- validateContentLength :: Int -> MaybeT IO Int

@@ -1,6 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
 -- |
 -- Module:       TestCase.Network.SIP.Serialization
 -- Description:  Test of complete SIP messages serialization.

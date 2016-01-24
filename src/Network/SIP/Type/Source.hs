@@ -1,6 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveDataTypeable #-}
 -- |
 -- Module:       Network.SIP.Type.Source
 -- Description:  Streaming type and its smart constructors.

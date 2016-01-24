@@ -33,4 +33,4 @@ serializeHeader (h, v) =
     -- TODO: Function fromJust in this section is not good, it needs to be
     -- rewritten and some sort of exception handling must be "invented".
     (original . fromJust $ lookup h headerNameMap) <> ": " <>
-    (encodeUtf8 v)
+    encodeUtf8 v

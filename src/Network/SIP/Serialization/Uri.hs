@@ -13,7 +13,6 @@ module Network.SIP.Serialization.Uri
 
 import Data.ByteString (ByteString)
 import Data.ByteString.Char8 (pack)
-import Data.Function (($))
 import Data.Maybe (Maybe(Nothing, Just))
 import Data.Monoid ((<>))
 import Data.Text.Encoding (encodeUtf8)
@@ -36,11 +35,11 @@ serializeScheme SIPS = "sips:"
 
 serializeUser :: Maybe Text -> ByteString
 serializeUser (Just t) = encodeUtf8 t <> "@"
-serializeUser (Nothing) = ""
+serializeUser Nothing = ""
 
 serializePort :: Maybe Word16 -> ByteString
-serializePort (Nothing) = ""
-serializePort (Just t) = ":" <> (pack $ show t)
+serializePort Nothing = ""
+serializePort (Just t) = ":" <> pack (show t)
   -- This pack and show can by probably optimized by some another function.
 
 serializeUri :: Uri -> ByteString

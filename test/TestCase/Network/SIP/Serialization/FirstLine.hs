@@ -1,6 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
 -- |
 -- Module:       TestCase.Network.SIP.Serialization.FirstLine
 -- Description:  Test of the SIP first line serialization.
@@ -15,8 +14,7 @@ import Data.Maybe (Maybe(Nothing))
 
 import Test.Framework.Providers.HUnit (testCase)
 import Test.Framework (Test, testGroup)
-import Test.HUnit.Base ((@=?))
-import Test.HUnit.Base (Assertion)
+import Test.HUnit.Base (Assertion, (@=?))
 
 import Network.SIP.Serialization.FirstLine (serializeFirstLine)
 import Network.SIP.Type.Message (MessageType(Request, Response))

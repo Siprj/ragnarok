@@ -8,8 +8,7 @@
 module TestCase.Network.SIP.Parser.Line (tests)
   where
 
-import Control.Monad (return)
-import Data.Bool (Bool(True, False))
+import Control.Monad (return, unless)
 import Data.ByteString (ByteString)
 import Data.Eq ((==))
 import Data.Function (($))
@@ -28,10 +27,8 @@ testHeaderLines :: ByteString -> [ByteString] -> Assertion
 testHeaderLines s hl = do
     source <- mkSource $ return s
     res <- headerLines source
-    case res == hl of
-        True -> return ()
-        False -> assertFailure $ "Error parsing: " <> show s
-            <> " expected result" <> show hl <> "\nActual result: " <> show res
+    unless (res == hl) $ assertFailure $ "Error parsing: " <> show s
+        <> " expected result" <> show hl <> "\nActual result: " <> show res
 
 message1 :: ByteString
 message1 = "REGISTER sips:ss2.biloxi.example.com SIP/2.0\r\n" <>

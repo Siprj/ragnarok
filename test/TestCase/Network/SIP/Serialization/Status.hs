@@ -1,7 +1,6 @@
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
 -- |
 -- Module:       TestCase.Network.SIP.Serialization.Status
 -- Description:  Test of the response status serialization.

@@ -1,6 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
 -- |
 -- Module:       TestCase.Network.SIP.Parser
 -- Description:  Test of SIP parser (whole messages are tested).
@@ -11,8 +10,8 @@ module TestCase.Network.SIP.Parser (tests)
 
 import Control.Monad ((>>=), return)
 import Data.ByteString (ByteString)
-import Data.Function (($), (.), id)
-import Data.Maybe (Maybe(Just, Nothing), maybe)
+import Data.Function (($), (.))
+import Data.Maybe (Maybe(Just, Nothing), fromMaybe)
 import Data.Monoid ((<>))
 
 import Test.Framework.Providers.HUnit (testCase)
@@ -81,7 +80,7 @@ runMsgTest msg content mt =
     , testCase "Test msg body" $ getMsg >>= ((@=?) content . msgBody)
     ]
   where
-    getMsg = mkSource (return $ msg <> maybe "" id content) >>= parseSipMessage
+    getMsg = mkSource (return $ msg <> fromMaybe "" content) >>= parseSipMessage
 
 tests :: [Test]
 tests =
