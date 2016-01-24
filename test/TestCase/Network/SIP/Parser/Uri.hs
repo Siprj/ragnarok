@@ -3,7 +3,7 @@
 -- |
 -- Module:       TestCase.Network.SIP.Parser.Header
 -- Description:  Test of URI parser.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module TestCase.Network.SIP.Parser.Uri (tests)
   where
@@ -15,25 +15,22 @@ import Data.Function (($))
 import Data.Maybe (Maybe(Just, Nothing))
 import Data.Monoid ((<>))
 import Data.Text (Text)
-import Text.Show (show)
 import Data.Word (Word16)
+import Text.Show (show)
 
-import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.HUnit (testCase)
+import Test.Framework (Test, testGroup)
 import Test.HUnit.Base ((@=?), assertString)
 import Test.HUnit.Lang (Assertion)
 
-import Network.SIP.Type.Uri
-    ( Uri(Uri)
-    , Scheme(SIP, SIPS)
-    )
 import Network.SIP.Parser.Uri (parseUri)
+import Network.SIP.Type.Uri (Uri(Uri), Scheme(SIP, SIPS))
 
 testUriParserUser :: ByteString ->  Scheme -> Text -> Text -> Assertion
 testUriParserUser s sch u h = Right (Uri sch (Just u) h Nothing) @=? parseUri s
 
-testUriParserAll ::
-       ByteString
+testUriParserAll
+    :: ByteString
     -> Scheme
     -> Maybe Text
     -> Text

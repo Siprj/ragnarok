@@ -4,29 +4,23 @@
 -- |
 -- Module:       TestCase.Network.SIP.Serialization.Header
 -- Description:  Test of SIP message serialization.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module TestCase.Network.SIP.Serialization.Header (tests)
   where
 
 import Data.ByteString (ByteString)
-import Data.Monoid ((<>))
 import Data.Function (($))
+import Data.Monoid ((<>))
 import Data.Text.Encoding (decodeUtf8)
 
-import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.HUnit (testCase)
+import Test.Framework (Test, testGroup)
 import Test.HUnit.Base ((@=?))
 import Test.HUnit.Lang (Assertion)
 
-import Network.SIP.Type.Header
-    ( HeaderName
-        ( Accept
-        , AcceptEncoding
-        , Custom
-        )
-    )
 import Network.SIP.Serialization.Header (serializeHeader)
+import Network.SIP.Type.Header (HeaderName (Accept, AcceptEncoding, Custom))
 
 testHeader :: HeaderName -> ByteString -> ByteString-> Assertion
 testHeader headerName headerName' value =

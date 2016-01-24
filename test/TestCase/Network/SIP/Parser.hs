@@ -5,7 +5,7 @@
 -- |
 -- Module:       TestCase.Network.SIP.Parser
 -- Description:  Test of SIP parser (whole messages are tested).
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module TestCase.Network.SIP.Parser (tests)
   where
@@ -16,20 +16,20 @@ import Data.Function (($), (.), id)
 import Data.Maybe (Maybe(Just, Nothing), maybe)
 import Data.Monoid ((<>))
 
-import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.HUnit (testCase)
+import Test.Framework (Test, testGroup)
 import Test.HUnit.Base ((@=?))
 
-import Network.SIP.Type.Source (mkSource)
 import Network.SIP.Parser (parseSipMessage)
 import Network.SIP.Type.Message
     ( MessageType(Request, Response)
     , msgType
     , msgBody
     )
-import Network.SIP.Type.Uri (Scheme(SIP), Uri(Uri))
 import Network.SIP.Type.RequestMethod (RequestMethod(INVITE))
 import Network.SIP.Type.ResponseStatus (Status(Status), ResponseCode(OK_200))
+import Network.SIP.Type.Source (mkSource)
+import Network.SIP.Type.Uri (Scheme(SIP), Uri(Uri))
 
 testMsg1 :: ByteString
 testMsg1 = "INVITE sip:13@10.10.1.13 SIP/2.0\r\n" <>

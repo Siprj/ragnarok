@@ -1,11 +1,10 @@
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 -- |
 -- Module:       TestCase.Network.SIP.Serialization.Uri
 -- Description:  Test of the URI serialization.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module TestCase.Network.SIP.Serialization.Uri (tests)
   where
@@ -14,16 +13,13 @@ import Data.ByteString (ByteString)
 import Data.Function (($), (.))
 import Data.Maybe (Maybe(Just, Nothing))
 
-import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.HUnit (testCase)
+import Test.Framework (Test, testGroup)
 import Test.HUnit.Base ((@=?))
 import Test.HUnit.Base (Assertion)
 
-import Network.SIP.Type.Uri
-    ( Uri(Uri)
-    , Scheme(SIP, SIPS)
-    )
 import Network.SIP.Serialization.Uri (serializeUri)
+import Network.SIP.Type.Uri (Uri(Uri), Scheme(SIP, SIPS))
 
 testUri :: ByteString -> Uri -> Assertion
 testUri r uri = r @=? serializeUri uri

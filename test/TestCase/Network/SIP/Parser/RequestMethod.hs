@@ -3,26 +3,24 @@
 -- |
 -- Module:       TestCase.Network.SIP.Parser.RequestMethod
 -- Description:  Test of request method parser.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module TestCase.Network.SIP.Parser.RequestMethod (tests)
   where
 
 import Data.Attoparsec.ByteString (parseOnly)
-import Data.ByteString (ByteString)
 import Data.Bool (Bool(True, False))
+import Data.ByteString (ByteString)
 import Data.Either (Either(Left, Right))
 import Data.Function (($))
 
-import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.HUnit (testCase)
+import Test.Framework (Test, testGroup)
 import Test.HUnit.Base ((@=?))
 import Test.HUnit.Lang (Assertion)
 
-import Network.SIP.Type.RequestMethod
-    ( RequestMethod(INVITE, UPDATE)
-    )
 import Network.SIP.Parser.RequestMethod (requestMethodParser)
+import Network.SIP.Type.RequestMethod (RequestMethod(INVITE, UPDATE))
 
 testHeaderParser :: ByteString -> RequestMethod -> Assertion
 testHeaderParser s r = Right r @=? parseOnly requestMethodParser s

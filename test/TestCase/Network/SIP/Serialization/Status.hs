@@ -5,7 +5,7 @@
 -- |
 -- Module:       TestCase.Network.SIP.Serialization.Status
 -- Description:  Test of the response status serialization.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module TestCase.Network.SIP.Serialization.Status (tests)
   where
@@ -14,18 +14,15 @@ import Data.ByteString (ByteString)
 import Data.ByteString.Char8 (unpack)
 import Data.Function (($))
 
-import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.HUnit (testCase)
+import Test.Framework (Test, testGroup)
 import Test.HUnit.Base ((@=?))
 
+import Network.SIP.Serialization.Status (serializeStatus)
 import Network.SIP.Type.ResponseStatus
     ( Status(Status)
-    , ResponseCode
-        ( OK_200
-        , Ringing_180
-        )
+    , ResponseCode (OK_200, Ringing_180)
     )
-import Network.SIP.Serialization.Status (serializeStatus)
 
 testStatus :: ByteString -> ResponseCode -> Test
 testStatus r code =

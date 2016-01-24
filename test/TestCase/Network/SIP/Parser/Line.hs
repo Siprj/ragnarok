@@ -3,7 +3,7 @@
 -- |
 -- Module:       TestCase.Network.SIP.Parser.Line
 -- Description:  Test of SIP line parser.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module TestCase.Network.SIP.Parser.Line (tests)
   where
@@ -16,8 +16,8 @@ import Data.Function (($))
 import Data.Monoid ((<>))
 import Text.Show (show)
 
-import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.HUnit (testCase)
+import Test.Framework (Test, testGroup)
 import Test.HUnit.Base (assertFailure)
 import Test.HUnit.Lang (Assertion)
 
@@ -30,8 +30,8 @@ testHeaderLines s hl = do
     res <- headerLines source
     case res == hl of
         True -> return ()
-        False -> assertFailure $ "Error parsing: " <> show s <> " expected result"
-            <> show hl <> "\nActual result: " <> show res
+        False -> assertFailure $ "Error parsing: " <> show s
+            <> " expected result" <> show hl <> "\nActual result: " <> show res
 
 message1 :: ByteString
 message1 = "REGISTER sips:ss2.biloxi.example.com SIP/2.0\r\n" <>

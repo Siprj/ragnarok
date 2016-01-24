@@ -3,7 +3,7 @@
 -- |
 -- Module:       TestCase.Network.SIP.Parser.Header
 -- Description:  Test of header parser.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module TestCase.Network.SIP.Parser.Header (tests)
   where
@@ -14,21 +14,19 @@ import Data.CaseInsensitive (CI)
 import Data.Function (($))
 import Data.Text (Text)
 
-import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.HUnit (testCase)
+import Test.Framework (Test, testGroup)
 import Test.HUnit.Base ((@=?))
 import Test.HUnit.Lang (Assertion)
 
-import Network.SIP.Type.Header
-    ( HeaderName
-        ( Accept
-        , AcceptEncoding
-        , Allow
-        )
-    )
 import Network.SIP.Parser (typeHeader)
+import Network.SIP.Type.Header (HeaderName (Accept, AcceptEncoding, Allow))
 
-testHeaderParser :: (CI ByteString, ByteString) -> HeaderName -> Text -> Assertion
+testHeaderParser
+    :: (CI ByteString, ByteString)
+    -> HeaderName
+    -> Text
+    -> Assertion
 testHeaderParser s hn ht = typeHeader s >>=  ((hn, ht) @=?)
 
 tests :: [Test]
