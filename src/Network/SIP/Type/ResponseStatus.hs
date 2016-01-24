@@ -6,10 +6,8 @@
 -- |
 -- Module:       Network.SIP.Type.ResponseStatus
 -- Description:
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
---
--- Big description.
 module Network.SIP.Type.ResponseStatus
     ( ResponseCode(..)
     , Status(..)
@@ -19,8 +17,8 @@ module Network.SIP.Type.ResponseStatus
   where
 
 import Data.Data (Data)
-import Data.Int (Int)
 import Data.Eq (Eq, (==))
+import Data.Int (Int)
 import Data.Text (Text)
 import GHC.Generics (Generic)
 import Text.Show (Show)

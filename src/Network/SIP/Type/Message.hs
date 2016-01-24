@@ -5,11 +5,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Type.Message
--- Description:
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Description:  Core type of SIP parser.
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 --
--- Big description.
+-- Message type is core type of the whole parser. This type is the output from
+-- parser and it is also the input to serialization.
 module Network.SIP.Type.Message
     ( Message (..)
     , MessageType (..)
@@ -17,16 +18,16 @@ module Network.SIP.Type.Message
   where
 
 import Data.ByteString (ByteString)
-import Data.Eq (Eq)
 import Data.Data (Data)
+import Data.Eq (Eq)
 import Data.Maybe (Maybe)
 import GHC.Generics (Generic)
 import Text.Show (Show)
 
 import Network.SIP.Type.Header (Header)
 import Network.SIP.Type.RequestMethod (RequestMethod)
-import Network.SIP.Type.Uri (Uri)
 import Network.SIP.Type.ResponseStatus (Status)
+import Network.SIP.Type.Uri (Uri)
 
 -- Performance test
 import Control.DeepSeq (NFData)

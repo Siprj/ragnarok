@@ -5,11 +5,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Type.Header
--- Description:
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Description:  Possible SIP headers and it's bytes string representaions.
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
---
--- Big description.
 module Network.SIP.Type.Header
     ( Header
     , HeaderName(..)
@@ -18,12 +16,12 @@ module Network.SIP.Type.Header
   where
 
 import Data.ByteString (ByteString)
+import Data.CaseInsensitive (CI)
 import Data.Data (Data)
 import Data.Eq (Eq)
 import Data.Text (Text)
 import GHC.Generics (Generic)
 import Text.Show (Show)
-import Data.CaseInsensitive (CI)
 
 -- Performance test
 import Control.DeepSeq (NFData)
@@ -47,6 +45,7 @@ data HeaderName
     | ContentLength
     | ContentType
     | CSeq
+    | Custom Text
     | Date
     | ErrorInfo
     | Expires
@@ -75,7 +74,6 @@ data HeaderName
     | Via
     | Warning
     | WWWAuthenticate
-    | Custom Text
   deriving (Show, Eq, Data, Generic, NFData)
 
 headerNameMap :: [(HeaderName, CI ByteString)]

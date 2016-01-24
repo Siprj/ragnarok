@@ -5,20 +5,18 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Type.RequestMethod
--- Description:
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Description:  Enumeration of all possible request method.
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
---
--- Big description.
 module Network.SIP.Type.RequestMethod
     ( RequestMethod(..)
     )
   where
 
-import Data.Eq (Eq)
 import Data.Data (Data)
-import Prelude (Enum)
+import Data.Eq (Eq)
 import GHC.Generics (Generic)
+import Prelude (Enum)
 import Text.Show (Show)
 
 -- Performance test

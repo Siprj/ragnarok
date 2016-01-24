@@ -6,10 +6,8 @@
 -- |
 -- Module:       Network.SIP.Type.Host
 -- Description:
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
---
--- Big description.
 module Network.SIP.Type.Host
     ( Host(..)
     )

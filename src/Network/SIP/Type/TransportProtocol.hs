@@ -5,18 +5,16 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Type.TransportProtocol
--- Description:
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Description:  Transports which are supported by SIP transmission.
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
---
--- Big description.
 module Network.SIP.Type.TransportProtocol
     ( TransportProtocol(..)
     )
   where
 
-import Data.Eq (Eq)
 import Data.Data (Data)
+import Data.Eq (Eq)
 import GHC.Generics (Generic)
 import Text.Show (Show)
 
