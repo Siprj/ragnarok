@@ -3,11 +3,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Serialization.Header
--- Description:  SIP message serialization.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Description:  SIP header serialization.
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 --
--- Serialize SIP message int to transportable form.
+-- Serialize SIP header into transportable form.
 module Network.SIP.Serialization.Header
     ( serializeHeader
     )

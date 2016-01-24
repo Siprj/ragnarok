@@ -2,8 +2,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module:       Network.SIP.Serialize.RequestMethod
--- Description:  Serialize request method (INVITE, etc...).
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Description:  Serialize request method.
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module Network.SIP.Serialization.RequestMethod
     ( serializeRequestMethod

@@ -4,10 +4,10 @@
 -- |
 -- Module:       Network.SIP.Serialization
 -- Description:  SIP message serialization.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 --
--- Serialize SIP message int to transportable form.
+-- Serialize SIP message into transportable form.
 module Network.SIP.Serialization
     ( serializeSipMessage
     )
@@ -22,9 +22,9 @@ import Data.Monoid ((<>))
 
 import Network.SIP.Type.Message
     ( Message(Message)
-    , msgType
-    , msgHeaders
     , msgBody
+    , msgHeaders
+    , msgType
     )
 import Network.SIP.Serialization.FirstLine (serializeFirstLine)
 import Network.SIP.Serialization.Header (serializeHeader)

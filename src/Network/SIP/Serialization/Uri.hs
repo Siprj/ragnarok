@@ -4,7 +4,7 @@
 -- |
 -- Module:       Network.SIP.Serialization.Uri
 -- Description:  Serialize URI into ByteString.
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
 module Network.SIP.Serialization.Uri
     ( serializeUri
@@ -24,10 +24,10 @@ import Text.Show (show)
 import Network.SIP.Type.Uri
     ( Scheme(SIP, SIPS)
     , Uri(Uri)
-    , uriScheme
-    , uriUser
     , uriHost
     , uriPort
+    , uriScheme
+    , uriUser
     )
 
 serializeScheme :: Scheme -> ByteString

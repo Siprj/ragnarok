@@ -1,11 +1,9 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 -- |
 -- Module:       Network.SIP.Utils
--- Description:
--- Copyright:    Copyright (c) 2015 Jan Sipr
+-- Description:  Some utilities common for all parts of SIP stack.
+-- Copyright:    Copyright (c) 2015-2016 Jan Sipr
 -- License:      MIT
---
--- Big description.
 module Network.SIP.Utils
     ( maybeToEither
     , aEToSipE
