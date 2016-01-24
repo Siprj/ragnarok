@@ -20,6 +20,7 @@ import qualified TestCase.Network.SIP.Parser.Line as Parser.Line (tests)
 import qualified TestCase.Network.SIP.Parser.RequestMethod as
     Parser.RequestMethod (tests)
 import qualified TestCase.Network.SIP.Parser.Uri as Parser.Uri (tests)
+import qualified TestCase.Network.SIP.Serialization as Serialization (tests)
 import qualified TestCase.Network.SIP.Serialization.FirstLine as
     Serialization.FirstLine (tests)
 import qualified TestCase.Network.SIP.Serialization.Header as
@@ -37,6 +38,8 @@ tests =
     , testGroup "TestCase.Network.SIP.Parser.RequestMethod"
         Parser.RequestMethod.tests
     , testGroup "TestCase.Network.SIP.Parser.Uri" Parser.Uri.tests
+    , testGroup "TestCase.Network.SIP.Serialization"
+        Serialization.tests
     , testGroup "TestCase.Network.SIP.Serialization.FirstLine"
         Serialization.FirstLine.tests
     , testGroup "TestCase.Network.SIP.Serialization.Header"
