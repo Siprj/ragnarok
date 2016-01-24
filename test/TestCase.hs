@@ -28,6 +28,8 @@ import qualified TestCase.Network.SIP.Serialization.Header as
     Serialization.Header (tests)
 import qualified TestCase.Network.SIP.Serialization.Uri as
     Serialization.Uri (tests)
+import qualified TestCase.Network.SIP.Serialization.Status as
+    Serialization.Status (tests)
 
 tests :: [Test]
 tests =
@@ -41,4 +43,6 @@ tests =
         Serialization.Header.tests
     , testGroup "TestCase.Network.SIP.Serialization.Uri"
         Serialization.Uri.tests
+    , testGroup "TestCase.Network.SIP.Serialization.Status"
+        Serialization.Status.tests
     ]
